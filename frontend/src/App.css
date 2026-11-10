@@ -1,0 +1,258 @@
+/* 🎨 THEME ET CONSTANTES VISUELLES */
+:root {
+  --bg-principal: #f4f6f8; /* Fond du site gris clair pour le contraste */
+  --fond-carte: #ffffff; /* Blanc pur pour détacher les éléments */
+  --texte-sombre: #1a1a1a;
+  --texte-gris: #666666;
+  --orange-maroc: #e44d26; /* Accentuation pour les prix et boutons d'achat */
+  --vert-succes: #27ae60; /* Boutons de validation */
+  --ombre-douce: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background-color: var(--bg-principal);
+  color: var(--texte-sombre);
+}
+
+/* 🧭 NAVBAR & BOUTONS COMPOSANTS */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #111;
+  color: white;
+  padding: 1.1rem 6%;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.btn-toggle-admin {
+  background: #2a2a2a;
+  color: white;
+  border: 1px solid #444;
+  padding: 8px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-toggle-admin:hover {
+  background: var(--orange-maroc);
+  border-color: var(--orange-maroc);
+}
+
+.panier-status {
+  background: #222;
+  padding: 10px 18px;
+  border-radius: 20px;
+  border: 1px solid #333;
+  font-weight: bold;
+}
+
+/* 🎴 GRILLE & BLOCS PRODUITS CLIENTS */
+.contenu {
+  padding: 2.5rem 6%;
+}
+
+.titre-page {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.grille-produits {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.carte-produit {
+  background-color: var(--fond-carte);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: var(--ombre-douce);
+  text-align: center;
+  transition: transform 0.2s;
+  border: 1px solid rgba(0, 0, 0, 0.02);
+}
+
+.carte-produit:hover {
+  transform: translateY(-5px);
+}
+
+.carte-produit img {
+  max-width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.prix {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: var(--orange-maroc);
+  margin: 15px 0;
+}
+
+.btn-ajouter {
+  background-color: var(--texte-sombre);
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 100%;
+  font-weight: bold;
+}
+
+.btn-ajouter:hover {
+  background-color: var(--orange-maroc);
+}
+
+/* 🛍️ PANIER CLIENT DÉROULANT */
+.panier-modal {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  position: absolute;
+  top: 75px;
+  right: 6%;
+  width: 330px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  z-index: 100;
+}
+
+.liste-panier {
+  list-style: none;
+  padding: 0;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.item-panier {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.total-section {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-top: 15px;
+  padding-top: 10px;
+  border-top: 2px solid #eee;
+}
+
+.actions-panier {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.btn-primaire,
+.btn-valider {
+  background: var(--vert-succes);
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  flex: 2;
+  font-weight: bold;
+}
+
+.btn-secondaire {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  flex: 1;
+  font-weight: bold;
+}
+
+/* 📊 LOGIQUE & STRUCTURE ESPACE ADMIN */
+.admin-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 30px;
+  align-items: start;
+}
+
+.admin-card {
+  background: white;
+  padding: 22px;
+  border-radius: 12px;
+  box-shadow: var(--ombre-douce);
+}
+
+.form-livraison,
+.form-admin-ajout {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.form-livraison label,
+.form-admin-ajout label {
+  font-weight: bold;
+  font-size: 0.85rem;
+  margin-top: 12px;
+  margin-bottom: 4px;
+}
+
+.form-livraison input,
+.form-livraison select,
+.form-livraison textarea,
+.form-admin-ajout input,
+.form-admin-ajout textarea {
+  padding: 9px;
+  border: 1px solid #8a5151;
+  border-radius: 6px;
+  font-family: inherit;
+}
+
+.infos-co {
+  font-size: 0.85rem;
+  background: #e8f8f0;
+  color: var(--vert-succes);
+  padding: 6px;
+  text-align: center;
+  border-radius: 4px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.table-commandes {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.table-commandes th,
+.table-commandes td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.table-commandes th {
+  background-color: var(--bg-principal);
+}
+/* 🎨 FOND SPÉCIFIQUE POUR L'ESPACE ADMIN */
+.admin-mode {
+  background-color: #b5c3d6; /* Gris-bleu doux pour différencier l'espace de gestion */
+  min-height: 100vh;
+}
