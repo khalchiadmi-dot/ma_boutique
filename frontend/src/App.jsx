@@ -77,9 +77,21 @@ export default function App() {
   return (
     <div className={modeAdmin ? "app-container admin-mode" : "app-container"}>
       <header className="navbar">
-        <div className="logo" onClick={() => { window.history.pushState({}, '', '/'); setModeAdmin(false); }} style={{ cursor: 'pointer' }}>ma_boutique</div>
+        <div
+          className="logo"
+          onClick={() => { window.history.pushState({}, '', '/'); setModeAdmin(false); }}
+          style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '10px' }}
+        >
+          <img
+            src="/images/logo.png"
+            alt="Logo Aurelia"
+            style={{ height: '42px', width: '42px', objectFit: 'contain', borderRadius: '50%' }}
+          />
+          <span>AURELIA</span>
+        </div>
         {!modeAdmin && <div className="panier-status" onClick={() => setVoirPanier(!voirPanier)} style={{ cursor: 'pointer' }}>🛒 Panier : <strong>{panier.length}</strong> art. ({totalPanier} €)</div>}
       </header>
+
 
       {!modeAdmin && voirPanier && (
         <div className="panier-modal">
