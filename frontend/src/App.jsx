@@ -21,7 +21,9 @@ export default function App() {
   const [ville, setVille] = useState('Casablanca');
   const [adresse, setAdresse] = useState('');
 
-  const API_URL = 'https://onrender.com';
+  const sousDomaine = "ma-boutique-api-bae2.";
+const API_URL = `https://${sousDomaine}onrender.com`;
+
 
   const verifierConnexionAdmin = (e) => {
     e.preventDefault();
