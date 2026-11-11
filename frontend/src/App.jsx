@@ -5,7 +5,7 @@
         className="logo"
         onClick={() => { window.history.pushState({}, '', '/'); setModeAdmin(false); }}
       >
-        <img src="/images/AURELIA.png" alt="AURELIA" className="logo-img" />
+        <img src="./images/AURELIA.png" alt="AURELIA" className="logo-img" />
       </div>
 
         {!modeAdmin && <div className="panier-status" onClick={() => setVoirPanier(!voirPanier)} style={{ cursor: 'pointer' }}>🛒 Panier : <strong>{panier.length}</strong> art. ({totalPanier} €)</div>}
