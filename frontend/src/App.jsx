@@ -2,11 +2,19 @@
     <div className={modeAdmin ? "app-container admin-mode" : "app-container"}>
       <header className="navbar">
               <div
-        className="logo"
-        onClick={() => { window.history.pushState({}, '', '/'); setModeAdmin(false); }}
-      >
-        <img src="./images/AURELIA.png" alt="AURELIA" className="logo-img" />
-      </div>
+          className="logo"
+          onClick={() => { window.history.pushState({}, '', '/'); setModeAdmin(false); }}
+          style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+        >
+          <svg width="150" height="64" viewBox="0 0 220 95" fill="none" xmlns="http://w3.org">
+            <polygon points="110,4 214,47.5 110,91 6,47.5" stroke="#D4AF37" strokeWidth="3" fill="#FFFFFF" />
+            <polygon points="110,10 204,47.5 110,85 16,47.5" stroke="#B8860B" strokeWidth="1" fill="none" />
+            <text x="110" y="53" textAnchor="middle" fill="#B8860B" fontFamily="Georgia, serif" fontSize="22" fontWeight="bold" letterSpacing="4">
+              AURELIA
+            </text>
+          </svg>
+        </div>
+
 
         {!modeAdmin && <div className="panier-status" onClick={() => setVoirPanier(!voirPanier)} style={{ cursor: 'pointer' }}>🛒 Panier : <strong>{panier.length}</strong> art. ({totalPanier} €)</div>}
       </header>
