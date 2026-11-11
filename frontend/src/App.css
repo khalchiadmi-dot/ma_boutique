@@ -16,7 +16,6 @@ body {
   color: var(--texte-sombre);
 }
 
-/* 🧭 NAVBAR & BOUTONS COMPOSANTS */
 /* 🧭 NAVBAR & BOUTONS COMPOSANTS (THÈME LUXE AURELIA) */
 .navbar {
   display: flex;
@@ -27,13 +26,6 @@ body {
   padding: 0.9rem 6%;
   border-bottom: 2px solid #d4af37;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
-}
-
-.logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #b8860b;
-  letter-spacing: 2px;
 }
 
 .panier-status {
@@ -268,17 +260,18 @@ body {
   min-height: 100vh;
 
   .logo {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    height: 70px;
-    overflow: hidden;
-  }
-
-  .logo-img {
-    height: 115px;
-    width: auto;
-    object-fit: contain;
-    display: block;
-  }
+  cursor: pointer;
+  display: flex;
+  align-items: center;
 }
+
+.logo-img {
+  height: 58px;
+  max-width: 160px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+
+  .
