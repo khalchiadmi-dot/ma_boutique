@@ -17,42 +17,34 @@ body {
 }
 
 /* 🧭 NAVBAR & BOUTONS COMPOSANTS */
+/* 🧭 NAVBAR & BOUTONS COMPOSANTS (THÈME LUXE AURELIA) */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #111;
-  color: white;
-  padding: 1rem 6%;
+  background-color: #ffffff;
+  color: #1a1a1a;
+  padding: 0.9rem 6%;
+  border-bottom: 2px solid #d4af37;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
 }
 
 .logo {
   font-size: 1.5rem;
   font-weight: bold;
-}
-
-.btn-toggle-admin {
-  background: #2a2a2a;
-  color: white;
-  border: 1px solid #444;
-  padding: 8px 15px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 600;
-}
-
-.btn-toggle-admin:hover {
-  background: var(--orange-maroc);
-  border-color: var(--orange-maroc);
+  color: #b8860b;
+  letter-spacing: 2px;
 }
 
 .panier-status {
-  background: #222;
+  background: #fdfbf7;
+  color: #1a1a1a;
   padding: 10px 18px;
   border-radius: 20px;
-  border: 1px solid #333;
+  border: 1px solid #d4af37;
   font-weight: bold;
 }
+
 
 /* 🎴 GRILLE EN FLEX (EN LIGNE) & CARTES COMPACTES */
 .contenu {
