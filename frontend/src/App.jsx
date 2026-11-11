@@ -145,7 +145,7 @@ export default function App() {
                     ))}
                   </ul>
                 </div>
-                <div className="admin-card">
+                                <div className="admin-card">
                   <h3>📦 Suivi des Commandes</h3>
                   <div className="table-responsive">
                     <table className="table-commandes">
