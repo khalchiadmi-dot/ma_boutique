@@ -9,10 +9,9 @@ app = Flask(__name__)
 # Autorise le frontend React à communiquer avec le serveur (GET, POST, DELETE, OPTIONS)
 CORS(app, resources={r"/api/*": {"origins": "*", "methods": ["GET", "POST", "DELETE", "OPTIONS"]}})
 
-# Utilise Supabase sur Render, ou votre base locale par défaut sur Windows
-DATABASE_URL = os.environ.get('DATABASE_URL', 'postgresql://ma_boutique_user:joujou@127.0.0.1:5432/ma_boutique_db')
-if DATABASE_URL.startswith("postgres://"):
-    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
+# Adresse Supabase IPv4 assemblée proprement pour éviter toute coupure
+hote_supabase = "aws-1-eu-west-1.pooler." + "supabase.com"
+DATABASE_URL = f"postgresql://postgres.amkhrovkelodfcevsqba:joujou@{hote_supabase}:5432/postgres"
 
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -137,7 +136,7 @@ def get_commandes():
     commandes = Commande.query.order_by(Commande.id.desc()).all()
     return jsonify([c.to_json() for c in commandes])
 
-# Création automatique des tables au démarrage (utile pour Supabase et Render)
+# Création automatique des tables au démarrage
 with app.app_context():
     db.create_all()
 
