@@ -13,7 +13,7 @@
           }}
         >
           <img
-            src="/images/aurelia.png"
+            src="/images/AURELIA.png"
             alt="AURELIA"
             style={{
               height: '68px',
