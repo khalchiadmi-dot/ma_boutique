@@ -1,97 +1,30 @@
-import { useState, useEffect } from 'react'
-import './App.css'
-
-export default function App() {
-  const [produits, setProduits] = useState([]);
-  const [panier, setPanier] = useState([]);
-  const [voirPanier, setVoirPanier] = useState(false);
-  const [envoiEnCours, setEnvoiEnCours] = useState(false);
-  const [modeAdmin, setModeAdmin] = useState(window.location.pathname === '/admin');
-  const [estConnecteAdmin, setEstConnecteAdmin] = useState(false);
-  const [motDePasseSaisi, setMotDePasseSaisi] = useState('');
-  const [commandesAdmin, setCommandesAdmin] = useState([]);
-
-  const [nouveauNom, setNouveauNom] = useState('');
-  const [nouveauPrix, setNouveauPrix] = useState('');
-  const [nouvelleDesc, setNouvelleDesc] = useState('');
-  const [nouvelleImg, setNouvelleImg] = useState('');
-  const [etapeCommande, setEtapeCommande] = useState(false);
-  const [nom, setNom] = useState('');
-  const [telephone, setTelephone] = useState('');
-  const [ville, setVille] = useState('');
-  const [adresse, setAdresse] = useState('');
-
-  const sousDomaine = "ma-boutique-api-bae2.";
-  const API_URL = `https://${sousDomaine}onrender.com`;
-
-  const verifierConnexionAdmin = (e) => {
-    e.preventDefault();
-    if (motDePasseSaisi === 'joujou') setEstConnecteAdmin(true);
-    else alert("❌ Mot de passe incorrect !");
-  };
-
-  const chargerProduits = () => {
-    fetch(`${API_URL}/api/produits`).then(r => r.json()).then(setProduits).catch(console.error);
-  };
-
-  const chargerCommandesAdmin = () => {
-    fetch(`${API_URL}/api/commandes`).then(r => r.json()).then(setCommandesAdmin).catch(console.error);
-  };
-
-  useEffect(() => { chargerProduits(); }, []);
-  useEffect(() => { if (modeAdmin) chargerCommandesAdmin(); }, [modeAdmin]);
-
-  const totalPanier = panier.reduce((acc, item) => acc + item.prix, 0).toFixed(2);
-
-  const gererAjoutProduit = (e) => {
-    e.preventDefault();
-    fetch(`${API_URL}/api/produits`, {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ nom: nouveauNom, prix: nouveauPrix, description: nouvelleDesc, image_url: nouvelleImg })
-    }).then(async r => {
-      const d = await r.json();
-      if (!r.ok) alert("⚠️ " + (d.error || "Erreur"));
-      else { alert("🚀 Article ajouté !"); setNouveauNom(''); setNouveauPrix(''); setNouvelleDesc(''); setNouvelleImg(''); chargerProduits(); }
-    });
-  };
-
-  const gererSuppressionProduit = (id) => {
-    if (window.confirm("Supprimer cet article ?")) {
-      fetch(`${API_URL}/api/produits/${id}`, { method: 'DELETE' }).then(chargerProduits);
-    }
-  };
-
-  const envoyerCommande = (e) => {
-    e.preventDefault();
-    if (envoiEnCours) return;
-    setEnvoiEnCours(true);
-
-    fetch(`${API_URL}/api/commandes`, {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ nom_client: nom, telephone, ville, adresse, total: totalPanier, articles: panier.map(i => ({ nom: i.nom, prix: i.prix })) })
-    }).then(r => r.json()).then(d => {
-      setEnvoiEnCours(false);
-      if (d.message === "Succès") { alert(`🎉 Commande #${d.commande_id} enregistrée !`); setPanier([]); setVoirPanier(false); setEtapeCommande(false); }
-    }).catch(() => setEnvoiEnCours(false));
-  };
   return (
     <div className={modeAdmin ? "app-container admin-mode" : "app-container"}>
       <header className="navbar">
         <div
           className="logo"
           onClick={() => { window.history.pushState({}, '', '/'); setModeAdmin(false); }}
-          style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '10px' }}
+          style={{
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            height: '68px',
+            overflow: 'hidden'
+          }}
         >
           <img
-            src="/images/logo.png"
-            alt="Logo Aurelia"
-            style={{ height: '42px', width: '42px', objectFit: 'contain', borderRadius: '50%' }}
+            src="/images/aurelia.png"
+            alt="AURELIA"
+            style={{
+              height: '68px',
+              width: 'auto',
+              objectFit: 'contain',
+              transform: 'scale(1.65)'
+            }}
           />
-          <span>AURELIA</span>
         </div>
         {!modeAdmin && <div className="panier-status" onClick={() => setVoirPanier(!voirPanier)} style={{ cursor: 'pointer' }}>🛒 Panier : <strong>{panier.length}</strong> art. ({totalPanier} €)</div>}
       </header>
-
 
       {!modeAdmin && voirPanier && (
         <div className="panier-modal">
