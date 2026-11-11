@@ -45,7 +45,6 @@ body {
   font-weight: bold;
 }
 
-
 /* 🎴 GRILLE EN FLEX (EN LIGNE) & CARTES COMPACTES */
 .contenu {
   padding: 2rem 6%;
@@ -269,18 +268,17 @@ body {
   min-height: 100vh;
 
   .logo {
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  height: 70px;
-  overflow: hidden;
-}
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    height: 70px;
+    overflow: hidden;
+  }
 
-.logo-img {
-  height: 115px;
-  width: auto;
-  object-fit: contain;
-  display: block;
-}
-
+  .logo-img {
+    height: 115px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+  }
 }
