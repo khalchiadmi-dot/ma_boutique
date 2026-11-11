@@ -1,11 +1,11 @@
 /* 🎨 THEME ET CONSTANTES VISUELLES */
 :root {
-  --bg-principal: #f4f6f8; /* Fond du site gris clair pour le contraste */
-  --fond-carte: #ffffff; /* Blanc pur pour détacher les éléments */
+  --bg-principal: #f4f6f8;
+  --fond-carte: #ffffff;
   --texte-sombre: #1a1a1a;
   --texte-gris: #666666;
-  --orange-maroc: #e44d26; /* Accentuation pour les prix et boutons d'achat */
-  --vert-succes: #27ae60; /* Boutons de validation */
+  --orange-maroc: #e44d26;
+  --vert-succes: #27ae60;
   --ombre-douce: 0 4px 15px rgba(0, 0, 0, 0.06);
 }
 
@@ -23,7 +23,7 @@ body {
   align-items: center;
   background-color: #111;
   color: white;
-  padding: 1.1rem 6%;
+  padding: 1rem 6%;
 }
 
 .logo {
@@ -54,58 +54,77 @@ body {
   font-weight: bold;
 }
 
-/* 🎴 GRILLE & BLOCS PRODUITS CLIENTS */
+/* 🎴 GRILLE EN FLEX (EN LIGNE) & CARTES COMPACTES */
 .contenu {
-  padding: 2.5rem 6%;
+  padding: 2rem 6%;
 }
 
 .titre-page {
   text-align: center;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
 }
 
 .grille-produits {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 30px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
 }
 
 .carte-produit {
+  flex: 0 1 210px;
+  max-width: 225px;
   background-color: var(--fond-carte);
-  border-radius: 12px;
-  padding: 20px;
+  border-radius: 10px;
+  padding: 14px;
   box-shadow: var(--ombre-douce);
   text-align: center;
   transition: transform 0.2s;
-  border: 1px solid rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .carte-produit:hover {
-  transform: translateY(-5px);
+  transform: translateY(-4px);
 }
 
 .carte-produit img {
-  max-width: 100%;
-  height: 200px;
+  width: 100%;
+  height: 145px;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 6px;
+}
+
+.carte-produit h3 {
+  font-size: 1rem;
+  margin: 10px 0 6px;
+}
+
+.carte-produit p {
+  font-size: 0.85rem;
+  color: var(--texte-gris);
+  margin: 0 0 8px;
 }
 
 .prix {
-  font-size: 1.4rem;
+  font-size: 1.15rem;
   font-weight: bold;
   color: var(--orange-maroc);
-  margin: 15px 0;
+  margin: 8px 0;
 }
 
 .btn-ajouter {
   background-color: var(--texte-sombre);
   color: white;
   border: none;
-  padding: 12px;
+  padding: 9px;
   border-radius: 6px;
   cursor: pointer;
   width: 100%;
+  font-size: 0.9rem;
   font-weight: bold;
 }
 
@@ -251,8 +270,9 @@ body {
 .table-commandes th {
   background-color: var(--bg-principal);
 }
+
 /* 🎨 FOND SPÉCIFIQUE POUR L'ESPACE ADMIN */
 .admin-mode {
-  background-color: #b5c3d6; /* Gris-bleu doux pour différencier l'espace de gestion */
+  background-color: #b5c3d6;
   min-height: 100vh;
 }
