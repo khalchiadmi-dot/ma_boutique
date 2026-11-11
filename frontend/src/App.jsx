@@ -22,8 +22,7 @@ export default function App() {
   const [adresse, setAdresse] = useState('');
 
   const sousDomaine = "ma-boutique-api-bae2.";
-const API_URL = `https://${sousDomaine}onrender.com`;
-
+  const API_URL = `https://${sousDomaine}onrender.com`;
 
   const verifierConnexionAdmin = (e) => {
     e.preventDefault();
@@ -148,14 +147,24 @@ const API_URL = `https://${sousDomaine}onrender.com`;
                 </div>
                 <div className="admin-card">
                   <h3>📦 Suivi des Commandes</h3>
-                  {commandesAdmin.length === 0 ? <p>Aucune commande.</p> : (
-                    <div className="table-responsive">
-                      <table className="table-commandes">
-                        <thead><tr><th>ID</th><th>Client</th><th>Téléphone</th><th>Ville</th><th>Total</th></tr></thead>
-                        <tbody>{commandesAdmin.map(c => <tr key={c.id}><td><strong>#{c.id}</strong></td><td>{c.nom_client}</td><td>{c.telephone}</td><td>{c.ville}</td><td style={{ color: 'var(--orange-maroc)', fontWeight: 'bold' }}>{c.total.toFixed(2)} DH</td></tr>)}</tbody>
-                      </table>
-                    </div>
-                  )}
+                  <div className="table-responsive">
+                    <table className="table-commandes">
+                      <thead>
+                        <tr><th>#</th><th>Client</th><th>Articles</th><th>Total</th><th>Statut</th></tr>
+                      </thead>
+                      <tbody>
+                        {commandesAdmin.map(c => (
+                          <tr key={c.id}>
+                            <td><strong>#{c.id}</strong></td>
+                            <td>{c.nom_client}<br /><small>{c.telephone} ({c.ville})</small></td>
+                            <td>{c.articles.map((a, i) => <div key={i}>{a.nom}</div>)}</td>
+                            <td><strong>{c.total.toFixed(2)} DH</strong></td>
+                            <td>{c.statut}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
@@ -167,8 +176,10 @@ const API_URL = `https://${sousDomaine}onrender.com`;
               {produits.map(p => (
                 <div key={p.id} className="carte-produit">
                   <img src={p.image_url} alt={p.nom} />
-                  <h3>{p.nom}</h3><p className="description">{p.description}</p><p className="prix">{p.prix.toFixed(2)} DH</p>
-                  <button onClick={() => setPanier([...panier, p])} className="btn-ajouter">Ajouter au panier</button>
+                  <h3>{p.nom}</h3>
+                  <p>{p.description}</p>
+                  <div className="prix">{p.prix.toFixed(2)} DH</div>
+                  <button className="btn-ajouter" onClick={() => setPanier([...panier, p])}>Ajouter au panier</button>
                 </div>
               ))}
             </div>
