@@ -1,28 +1,13 @@
   return (
     <div className={modeAdmin ? "app-container admin-mode" : "app-container"}>
       <header className="navbar">
-        <div
-          className="logo"
-          onClick={() => { window.history.pushState({}, '', '/'); setModeAdmin(false); }}
-          style={{
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            height: '68px',
-            overflow: 'hidden'
-          }}
-        >
-          <img
-            src="/images/AURELIA.png"
-            alt="AURELIA"
-            style={{
-              height: '68px',
-              width: 'auto',
-              objectFit: 'contain',
-              transform: 'scale(1.65)'
-            }}
-          />
-        </div>
+              <div
+        className="logo"
+        onClick={() => { window.history.pushState({}, '', '/'); setModeAdmin(false); }}
+      >
+        <img src="/images/AURELIA.png" alt="AURELIA" className="logo-img" />
+      </div>
+
         {!modeAdmin && <div className="panier-status" onClick={() => setVoirPanier(!voirPanier)} style={{ cursor: 'pointer' }}>🛒 Panier : <strong>{panier.length}</strong> art. ({totalPanier} €)</div>}
       </header>
 
