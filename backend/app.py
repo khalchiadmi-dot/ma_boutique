@@ -11,7 +11,8 @@ CORS(app, resources={r"/api/*": {"origins": "*", "methods": ["GET", "POST", "DEL
 
 # Adresse Supabase IPv4 assemblée proprement pour éviter toute coupure
 hote_supabase = "aws-1-eu-west-1.pooler." + "supabase.com"
-DATABASE_URL = f"postgresql://postgres.amkhrovkelodfcevsqba:joujou@{hote_supabase}:5432/postgres"
+DATABASE_URL = f"postgresql://postgres.amkhrovkelodfcevsqba:BoutiqueJohara2026@{hote_supabase}:5432/postgres"
+
 
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
