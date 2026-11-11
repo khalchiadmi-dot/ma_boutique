@@ -267,4 +267,20 @@ body {
 .admin-mode {
   background-color: #b5c3d6;
   min-height: 100vh;
+
+  .logo {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  height: 70px;
+  overflow: hidden;
+}
+
+.logo-img {
+  height: 115px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
 }
