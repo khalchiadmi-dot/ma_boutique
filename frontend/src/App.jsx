@@ -82,7 +82,7 @@ export default function App() {
           onClick={() => { window.history.pushState({}, '', '/'); setModeAdmin(false); }}
         >
           <img
-            src="/images/AURELIA1.png"
+            src="/images/logo.png"
             alt="AURELIA"
             className="logo-img"
           />
