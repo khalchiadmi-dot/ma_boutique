@@ -52,7 +52,7 @@ body {
   height: 115px;
   object-fit: contain;
   display: block;
-  filter: invert(1) grayscale(1) contrast(3.5) brightness(1.4);
+  filter: invert(1) grayscale(1) contrast(3.5);
   mix-blend-mode: screen;
 }
 
