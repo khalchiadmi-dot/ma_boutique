@@ -48,12 +48,14 @@ body {
 }
 
 .logo-img {
-  height: 78px;
+  height: 62px;
   width: auto;
   object-fit: contain;
   display: block;
-  filter: sepia(1) saturate(10) hue-rotate(180deg) invert(1) contrast(5)
-    brightness(2);
+  background-color: #ffffff;
+  padding: 4px 10px;
+  border-radius: 8px;
+  border: 1.5px solid #d4af37;
 }
 
 .logo-texte {
