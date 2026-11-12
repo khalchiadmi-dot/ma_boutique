@@ -77,17 +77,18 @@ export default function App() {
     return (
     <div className={modeAdmin ? "app-container admin-mode" : "app-container"}>
       <header className="navbar">
-                <div
+                        <div
           className="logo"
           onClick={() => { window.history.pushState({}, '', '/'); setModeAdmin(false); }}
         >
           <img
-            src="./images/logo-aurelia.png"
+            src="/images/logo-aurelia.png"
             alt="AURELIA"
             className="logo-img"
           />
           <span className="logo-texte">AURELIA</span>
         </div>
+
 
         {!modeAdmin && <div className="panier-status" onClick={() => setVoirPanier(!voirPanier)} style={{ cursor: 'pointer' }}>🛒 Panier : <strong>{panier.length}</strong> art. ({totalPanier} €)</div>}
       </header>
