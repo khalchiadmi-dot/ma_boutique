@@ -260,18 +260,16 @@ body {
   min-height: 100vh;
 
   .logo {
-  cursor: pointer;
-  display: flex;
-  align-items: center;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+
+  .logo-img {
+    height: 58px;
+    max-width: 160px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+  }
 }
-
-.logo-img {
-  height: 58px;
-  max-width: 160px;
-  width: auto;
-  object-fit: contain;
-  display: block;
-}
-
-
-  .
