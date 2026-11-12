@@ -52,7 +52,7 @@ body {
   width: auto;
   object-fit: contain;
   display: block;
-  filter: invert(1) contrast(1.5);
+  filter: grayscale(1) invert(1) contrast(1.8);
   mix-blend-mode: screen;
 }
 
