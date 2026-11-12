@@ -85,7 +85,7 @@ export default function App() {
             src="/images/AURELIA.png"
             alt="AURELIA"
             className="logo-img"
-          />
+          />AURELIA
         </div>
 
         {!modeAdmin && <div className="panier-status" onClick={() => setVoirPanier(!voirPanier)} style={{ cursor: 'pointer' }}>🛒 Panier : <strong>{panier.length}</strong> art. ({totalPanier} €)</div>}
