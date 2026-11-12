@@ -16,16 +16,16 @@ body {
   color: var(--texte-sombre);
 }
 
-/* 🧭 NAVBAR LUXE NOIR & OR POUR AURELIA */
+/* 🧭 NAVBAR NOIR PROFOND & LOGO BLANC FUSIONNÉ */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #0e0e0e;
+  background-color: #000000;
   color: #ffffff;
-  padding: 0.75rem 5%;
+  padding: 0.6rem 5%;
   border-bottom: 2px solid #d4af37;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   gap: 12px;
 }
 
@@ -36,28 +36,39 @@ body {
   gap: 10px;
 }
 
+/* Recadrage des marges + inversion en blanc sur fond noir invisible */
+.logo-box {
+  width: 65px;
+  height: 65px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000000;
+}
+
 .logo-img {
-  height: 56px;
-  width: auto;
+  width: 110px;
+  height: 110px;
   object-fit: contain;
   display: block;
+  filter: invert(1) grayscale(1) contrast(1.4);
+  mix-blend-mode: screen;
 }
 
 .logo-texte {
   font-family: "Georgia", "Times New Roman", serif;
-  font-size: 2.3rem;
+  font-size: 2.1rem;
   font-weight: 600;
   letter-spacing: 3px;
-  color: #d4af37 !important;
+  color: #ffffff !important;
   text-transform: uppercase;
   line-height: 1;
-  display: flex;
-  align-items: center;
 }
 
 .panier-status {
-  background: #1c1c1c;
-  color: #f5e6b3;
+  background: #141414;
+  color: #ffffff;
   padding: 9px 16px;
   border-radius: 20px;
   border: 1px solid #d4af37;
@@ -65,23 +76,25 @@ body {
   white-space: nowrap;
 }
 
-/* 📱 AJUSTEMENT SPÉCIAL MOBILE (SAMSUNG S20) */
+/* 📱 AJUSTEMENT MOBILE (SAMSUNG S20) */
 @media (max-width: 600px) {
   .navbar {
-    padding: 0.6rem 3%;
-    gap: 8px;
-  }
-
-  .logo {
+    padding: 0.5rem 3%;
     gap: 6px;
   }
 
+  .logo-box {
+    width: 44px;
+    height: 44px;
+  }
+
   .logo-img {
-    height: 38px;
+    width: 74px;
+    height: 74px;
   }
 
   .logo-texte {
-    font-size: 1.45rem;
+    font-size: 1.35rem;
     letter-spacing: 1.5px;
   }
 
