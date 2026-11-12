@@ -32,14 +32,23 @@ body {
   cursor: pointer;
   display: flex;
   align-items: center;
+  gap: 12px;
 }
 
 .logo-img {
-  height: 58px;
-  max-width: 160px;
+  height: 82px;
+  max-width: 220px;
   width: auto;
   object-fit: contain;
   display: block;
+}
+.logo-texte {
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 1.85rem;
+  font-weight: bold;
+  letter-spacing: 3px;
+  color: #c5a028;
+  text-transform: uppercase;
 }
 
 .panier-status {
