@@ -52,7 +52,7 @@ body {
   width: auto;
   object-fit: contain;
   display: block;
-  filter: invert(1) grayscale(1) brightness(1.2);
+  filter: invert(1) grayscale(1) brightness(1.8) contrast(1.4);
 }
 
 .logo-texte {
