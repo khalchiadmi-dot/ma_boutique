@@ -1,0 +1,105 @@
+export default function Admin({
+  estConnecteAdmin,
+  verifierConnexionAdmin,
+  motDePasseSaisi,
+  setMotDePasseSaisi,
+  gererAjoutProduit,
+  nouveauNom,
+  setNouveauNom,
+  nouveauPrix,
+  setNouveauPrix,
+  nouvelleImg,
+  setNouvelleImg,
+  nouvelleDesc,
+  setNouvelleDesc,
+  produits,
+  gererSuppressionProduit,
+  commandesAdmin
+}) {
+  if (!estConnecteAdmin) {
+    return (
+      <div className="admin-card" style={{ maxWidth: '350px', margin: '50px auto', textAlign: 'center' }}>
+        <h2>🔒 Accès Réservé</h2>
+        <form onSubmit={verifierConnexionAdmin} className="form-admin-ajout">
+          <label>Mot de passe :</label>
+          <input
+            type="password"
+            required
+            value={motDePasseSaisi}
+            onChange={(e) => setMotDePasseSaisi(e.target.value)}
+          />
+          <button type="submit" className="btn-valider" style={{ marginTop: '15px' }}>
+            Déverrouiller
+          </button>
+        </form>
+      </div>
+    );
+  }
+
+  return (
+    <div className="admin-dashboard">
+      <h1 className="titre-page">Tableau de bord Admin</h1>
+      <div className="admin-grid">
+        <div className="admin-card">
+          <h3>+ Ajouter un produit</h3>
+          <form onSubmit={gererAjoutProduit} className="form-admin-ajout">
+            <label>Nom :</label>
+            <input type="text" required value={nouveauNom} onChange={(e) => setNouveauNom(e.target.value)} />
+            <label>Prix (€) :</label>
+            <input type="number" step="0.01" required value={nouveauPrix} onChange={(e) => setNouveauPrix(e.target.value)} />
+            <label>Image (URL) :</label>
+            <input type="text" value={nouvelleImg} onChange={(e) => setNouvelleImg(e.target.value)} />
+            <label>Description :</label>
+            <textarea value={nouvelleDesc} onChange={(e) => setNouvelleDesc(e.target.value)} />
+            <button type="submit" className="btn-valider" style={{ marginTop: '15px' }}>
+              Injecter
+            </button>
+          </form>
+
+          <hr style={{ margin: '20px 0', border: '0', borderTop: '1px solid #eee' }} />
+          <h3>🗑️ Articles en vitrine</h3>
+          <ul className="liste-panier" style={{ maxHeight: '200px' }}>
+            {produits.map((p) => (
+              <li key={p.id} className="item-panier" style={{ alignItems: 'center' }}>
+                <span>{p.nom} ({p.prix} €)</span>
+                <button
+                  onClick={() => gererSuppressionProduit(p.id)}
+                  className="btn-secondaire"
+                  style={{ flex: 'none', padding: '4px 8px' }}
+                >
+                  X
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="admin-card">
+          <h3>📦 Commandes reçues</h3>
+          <div className="table-responsive">
+            <table className="table-commandes">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Client</th>
+                  <th>Ville</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                {commandesAdmin.map((c) => (
+                  <tr key={c.id}>
+                    <td>{c.id}</td>
+                    <td>{c.nom_client}<br /><small>{c.telephone}</small></td>
+                    <td>{c.ville}</td>
+                    <td><strong>{c.total} €</strong></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
