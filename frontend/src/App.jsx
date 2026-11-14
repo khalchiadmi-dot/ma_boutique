@@ -93,10 +93,11 @@ export default function App() {
   return (
     <div className={modeAdmin ? "app-container admin-mode" : "app-container"}>
       <Navbar
-        modeAdmin={modeAdmin} setModeAdmin={setModeAdmin} setPageActive={setPageActive}
+                modeAdmin={modeAdmin} setModeAdmin={setModeAdmin} setPageActive={setPageActive}
         panierCount={panier.length} totalPanier={totalPanier}
         voirPanier={voirPanier} setVoirPanier={setVoirPanier}
       />
+
 
       {!modeAdmin && voirPanier && (
         <div className="panier-modal">
