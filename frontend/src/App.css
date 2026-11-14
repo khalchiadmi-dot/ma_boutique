@@ -67,6 +67,15 @@ body {
   line-height: 1;
 }
 
+.logo-texte-slogan {
+  font-size: 1.1rem;
+  font-weight: 400;
+  letter-spacing: 2px;
+  color: #d4af37 !important;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
 .panier-status {
   background: #141414;
   color: #ffffff;
