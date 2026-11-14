@@ -82,6 +82,12 @@ body {
   align-items: center; /* Centre les textes horizontalement */
   gap: 4px; /* Ajoute un petit espace propre entre chaque ligne */
 }
+.logo-textes-conteneur {
+  display: flex;
+  flex-direction: column; /* Place le slogan juste en dessous de AURELIA */
+  align-items: center; /* Centre le slogan sous le nom (mettez flex-start pour aligner à gauche) */
+  gap: 5px; /* Crée un petit espace propre entre les deux lignes */
+}
 
 .panier-status {
   background: #141414;

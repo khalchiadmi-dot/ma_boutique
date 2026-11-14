@@ -86,8 +86,11 @@ export default function App() {
             alt="AURELIA"
             className="logo-img"
           />
-          <span className="logo-texte">AURELIA</span>
-          <span className="logo-texte-slogan">Bijoux & Accessoires</span>
+          <div className="logo-textes-bloc">
+            <span className="logo-texte">AURELIA</span>
+            <span className="logo-texte-slogan">Bijoux & Accessoires</span>
+            
+          </div>
         </div>
 
 
