@@ -355,3 +355,169 @@ body {
   background-color: #b5c3d6;
   min-height: 100vh;
 }
+/* =========================================================
+   NOUVEAUX STYLES : MENU 3 TIRETS & PAGE D'ACCUEIL AURELIA
+   ========================================================= */
+
+/* Alignement gauche de la navbar (3 tirets + logo) */
+.navbar-gauche {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Correction de la boîte du logo (supprime le fond rose et le cadre coupé) */
+.logo-box {
+  width: auto !important;
+  height: 75px !important;
+  background-color: transparent !important;
+  overflow: visible !important;
+}
+
+.logo img,
+.logo-img {
+  height: 75px !important;
+  width: auto !important;
+  aspect-ratio: auto !important;
+  max-height: none !important;
+  max-width: none !important;
+  object-fit: contain;
+}
+
+/* Empilement vertical propre de AURELIA et Bijoux & Accessoires */
+.logo-textes-bloc {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 4px;
+}
+
+/* ☰ MENU 3 TIRETS HORIZONTAUX (BURGER) */
+.menu-burger-zone {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.btn-burger {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 20px;
+  padding: 0;
+}
+
+.btn-burger span {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: #d4af37;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+.btn-burger:hover span {
+  background-color: #ffffff;
+}
+
+/* Liste déroulante ouverte par les 3 tirets */
+.menu-deroulant {
+  position: absolute;
+  top: 42px;
+  left: 0;
+  background-color: #111111;
+  border: 1px solid #d4af37;
+  border-radius: 8px;
+  padding: 6px 0;
+  display: flex;
+  flex-direction: column;
+  min-width: 205px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+  z-index: 999;
+}
+
+.menu-deroulant a {
+  color: #ffffff;
+  text-decoration: none;
+  padding: 12px 18px;
+  font-size: 0.95rem;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+
+.menu-deroulant a:hover {
+  background-color: #222222;
+  color: #d4af37;
+}
+
+/* 🌟 PAGE D'ACCUEIL AVEC DÉGRADÉ NOIR & OR */
+.hero-accueil {
+  min-height: calc(100vh - 95px);
+  background: linear-gradient(135deg, #000000 0%, #1c160c 55%, #3d2e12 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem 5%;
+}
+
+.hero-contenu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-logo-central {
+  height: 150px;
+  width: auto;
+  margin-bottom: 1.5rem;
+  filter: drop-shadow(0 4px 12px rgba(212, 175, 55, 0.25));
+}
+
+.hero-titre {
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 3.5rem;
+  font-weight: 600;
+  letter-spacing: 6px;
+  color: #d4af37;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.hero-sous-titre {
+  font-family: "Segoe UI", "Arial", sans-serif;
+  font-size: 1.25rem;
+  letter-spacing: 3px;
+  color: #f0d78c;
+  text-transform: uppercase;
+  margin-top: 10px;
+}
+
+/* 📱 ADAPTATION MOBILE */
+@media (max-width: 600px) {
+  .logo-box,
+  .logo img,
+  .logo-img {
+    height: 55px !important;
+  }
+
+  .hero-logo-central {
+    height: 110px;
+  }
+
+  .hero-titre {
+    font-size: 2.3rem;
+    letter-spacing: 4px;
+  }
+
+  .hero-sous-titre {
+    font-size: 0.95rem;
+    letter-spacing: 2px;
+  }
+}
