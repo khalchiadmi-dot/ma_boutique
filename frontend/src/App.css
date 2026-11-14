@@ -47,13 +47,12 @@ body {
   background-color: #000000;
 }
 
-.logo-img {
-  height: 65px;
-  width: auto;
+.logo img {
+  height: 85px !important; /* Augmentez ou diminuez cette valeur (ex: 70px à 110px) */
+  width: auto !important; /* Conserve les proportions exactes de la tête de lion */
+  max-height: none !important; /* Annule les limites du thème par défaut */
+  max-width: none !important;
   object-fit: contain;
-  display: block;
-  filter: grayscale(1) invert(1) contrast(1.8);
-  mix-blend-mode: screen;
 }
 
 .logo-texte {
