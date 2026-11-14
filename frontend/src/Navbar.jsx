@@ -3,6 +3,7 @@ import { useState } from 'react';
 export default function Navbar({
   modeAdmin,
   setModeAdmin,
+  pageActive,      // <-- 1. Vérifiez que pageActive est bien écrit ici
   setPageActive,
   panierCount,
   totalPanier,
@@ -70,7 +71,8 @@ export default function Navbar({
         </div>
       </div>
 
-      {!modeAdmin && (
+      {/* 2. Le bouton Panier est caché tant que pageActive === 'accueil' */}
+      {!modeAdmin && pageActive !== 'accueil' && (
         <div
           className="panier-status"
           onClick={() => setVoirPanier(!voirPanier)}
