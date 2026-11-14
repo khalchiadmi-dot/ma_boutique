@@ -23,7 +23,7 @@ body {
   align-items: center;
   background-color: #000000;
   color: #ffffff;
-  padding: 0.6rem 5%;
+  padding: 0.7rem 5%;
   border-bottom: 2px solid #d4af37;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   gap: 12px;
@@ -33,58 +33,57 @@ body {
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 14px;
 }
 
-/* Recadrage des marges + inversion en blanc sur fond noir invisible */
+/* Boîte du lion : transparente et ajustée à la taille du logo */
 .logo-box {
-  width: 65px;
-  height: 65px;
-  overflow: hidden;
+  width: auto;
+  height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #eb8484;
+  background-color: transparent;
 }
 
-/* Adaptez le sélecteur (header img, header svg, ou votre classe .logo) */
-
-.logo img {
-  height: 100px !important; /* Augmentez ou diminuez selon le rendu souhaité */
-  width: auto !important; /* Supprime le format carré 74x74 (1:1) */
+.logo img,
+.logo-box img {
+  height: 80px !important;
+  width: auto !important;
   aspect-ratio: auto !important;
   max-height: none !important;
   max-width: none !important;
+  object-fit: contain;
+}
+
+.logo-textes-conteneur {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Aligne AURELIA et le slogan à gauche (mettez center pour centrer) */
+  justify-content: center;
+  gap: 4px;
 }
 
 .logo-texte {
-  display: block !important;
-  font-family: "Georgia", "Times New Roman", serif !important;
+  display: block;
+  font-family: "Georgia", "Times New Roman", serif;
   font-size: 2.1rem;
   font-weight: 600;
   letter-spacing: 3px;
-  color: #d4af37 !important;
+  color: #d4af37;
   text-transform: uppercase;
   line-height: 1;
 }
 
 .logo-texte-slogan {
-  display: block !important; /* Force le passage à la ligne sous AURELIA */
-  margin-top: 6px !important; /* Crée un espace propre entre AURELIA et le slogan */
-  font-family: "Arial", sans-serif !important;
-  font-size: 0.9rem !important;
+  display: block;
+  font-family: "Segoe UI", "Arial", sans-serif;
+  font-size: 0.85rem;
   font-weight: 400;
-  letter-spacing: 2px;
-  color: #d4af37 !important;
+  letter-spacing: 2.5px;
+  color: #d4af37;
   text-transform: uppercase;
   line-height: 1;
-}
-
-.logo-textes-conteneur {
-  display: flex;
-  flex-direction: column; /* Place le slogan juste en dessous de AURELIA */
-  align-items: center; /* Centre le slogan sous le nom (mettez flex-start pour aligner à gauche) */
-  gap: 5px; /* Crée un petit espace propre entre les deux lignes */
 }
 
 .panier-status {
@@ -101,22 +100,31 @@ body {
 @media (max-width: 600px) {
   .navbar {
     padding: 0.5rem 3%;
-    gap: 6px;
+    gap: 8px;
+  }
+
+  .logo {
+    gap: 8px;
   }
 
   .logo-box {
-    width: 44px;
-    height: 44px;
+    height: 55px;
   }
 
-  .logo-img {
-    width: 74px;
-    height: 74px;
+  .logo img,
+  .logo-box img {
+    height: 55px !important;
+    width: auto !important;
   }
 
   .logo-texte {
     font-size: 1.35rem;
     letter-spacing: 1.5px;
+  }
+
+  .logo-texte-slogan {
+    font-size: 0.65rem;
+    letter-spacing: 1.2px;
   }
 
   .panier-status {
