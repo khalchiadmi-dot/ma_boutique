@@ -58,7 +58,8 @@ body {
 }
 
 .logo-texte {
-  font-family: "Georgia", "Times New Roman", serif;
+  display: block !important;
+  font-family: "Georgia", "Times New Roman", serif !important;
   font-size: 2.1rem;
   font-weight: 600;
   letter-spacing: 3px;
@@ -68,12 +69,14 @@ body {
 }
 
 .logo-texte-slogan {
-  font-family: "lombardic", "Arial", sans-serif;
-  font-size: 1.1rem;
+  display: block !important; /* Force le passage à la ligne sous AURELIA */
+  margin-top: 6px !important; /* Crée un espace propre entre AURELIA et le slogan */
+  font-family: "Arial", sans-serif !important;
+  font-size: 0.9rem !important;
   font-weight: 400;
   letter-spacing: 2px;
   color: #d4af37 !important;
-
+  text-transform: uppercase;
   line-height: 1;
 }
 
