@@ -48,10 +48,8 @@ body {
 }
 
 /* Adaptez le sélecteur (header img, header svg, ou votre classe .logo) */
-header img,
-header svg,
-.logo img,
-.logo svg {
+
+.logo img {
   height: 100px !important; /* Augmentez ou diminuez selon le rendu souhaité */
   width: auto !important; /* Supprime le format carré 74x74 (1:1) */
   aspect-ratio: auto !important;
