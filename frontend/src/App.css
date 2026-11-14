@@ -47,12 +47,16 @@ body {
   background-color: #eb8484;
 }
 
-.logo img {
-  height: 85px !important; /* Augmentez ou diminuez cette valeur (ex: 70px à 110px) */
-  width: auto !important; /* Conserve les proportions exactes de la tête de lion */
-  max-height: none !important; /* Annule les limites du thème par défaut */
+/* Adaptez le sélecteur (header img, header svg, ou votre classe .logo) */
+header img,
+header svg,
+.logo img,
+.logo svg {
+  height: 100px !important; /* Augmentez ou diminuez selon le rendu souhaité */
+  width: auto !important; /* Supprime le format carré 74x74 (1:1) */
+  aspect-ratio: auto !important;
+  max-height: none !important;
   max-width: none !important;
-  object-fit: contain;
 }
 
 .logo-texte {
