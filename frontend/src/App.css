@@ -68,12 +68,19 @@ body {
 }
 
 .logo-texte-slogan {
+  font-family: "lombardic", "Arial", sans-serif;
   font-size: 1.1rem;
   font-weight: 400;
   letter-spacing: 2px;
   color: #d4af37 !important;
-  text-transform: uppercase;
+
   line-height: 1;
+}
+.logo-textes-bloc {
+  display: flex;
+  flex-direction: column; /* Empile AURELIA, Bijoux & Accessoires et Boutique en ligne l'un sous l'autre */
+  align-items: center; /* Centre les textes horizontalement */
+  gap: 4px; /* Ajoute un petit espace propre entre chaque ligne */
 }
 
 .panier-status {
