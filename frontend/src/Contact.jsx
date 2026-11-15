@@ -17,73 +17,114 @@ export default function Contact() {
   };
 
   return (
-    <main className="contenu">
+    <main className="contact-page">
       <h2 className="titre-page">Contactez-nous</h2>
-      <p style={{ textAlign: 'center', maxWidth: '600px', margin: '0 auto 30px' }}>
-        Une question sur un bijou, une commande ou une livraison internationale ? Notre équipe AURELIA vous répond sous 24h.
+      <p className="contact-intro">
+        Une question sur un bijou, une commande personnalisée ou une livraison internationale ? Notre équipe AURELIA vous répond sous 24h.
       </p>
 
-      <div style={{ maxWidth: '500px', margin: '0 auto', background: '#fff', padding: '25px', borderRadius: '10px', boxShadow: '0 2px 10px rgba(0,0,0,0.08)' }}>
-        {envoye ? (
-          <div style={{ textAlign: 'center', padding: '20px' }}>
-            <h3>✨ Merci pour votre message !</h3>
-            <p>Nous avons bien reçu votre demande et nous vous répondrons très rapidement.</p>
-            <button
-              className="btn-primaire"
-              onClick={() => setEnvoye(false)}
-              style={{ marginTop: '15px' }}
-            >
-              Envoyer un autre message
-            </button>
+      <div className="contact-grille">
+        {/* Colonne de gauche : Coordonnées */}
+        <div className="contact-infos-carte">
+          <h3>Service Client AURELIA</h3>
+
+          <div className="contact-info-item">
+            <span className="contact-info-icone">📧</span>
+            <div>
+              <strong>E-mail</strong>
+              <div>contact@aurelia-bijoux.com</div>
+            </div>
           </div>
-        ) : (
-          <form onSubmit={gererEnvoi} className="form-livraison">
-            <label>Votre nom complet :</label>
-            <input
-              type="text"
-              required
-              placeholder="Ex. Sarah Martin"
-              value={nom}
-              onChange={(e) => setNom(e.target.value)}
-            />
 
-            <label>Votre adresse e-mail :</label>
-            <input
-              type="email"
-              required
-              placeholder="Ex. sarah@email.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
+          <div className="contact-info-item">
+            <span className="contact-info-icone">🌍</span>
+            <div>
+              <strong>Livraison Internationale</strong>
+              <div>Expédition suivie dans le monde entier.</div>
+            </div>
+          </div>
 
-            <label>Sujet :</label>
-            <input
-              type="text"
-              required
-              placeholder="Question sur un produit, suivi de commande..."
-              value={sujet}
-              onChange={(e) => setSujet(e.target.value)}
-            />
+          <div className="contact-info-item">
+            <span className="contact-info-icone">🕒</span>
+            <div>
+              <strong>Horaires de réponse</strong>
+              <div>Lundi au Samedi : 9h00 – 19h00</div>
+            </div>
+          </div>
 
-            <label>Votre message :</label>
-            <textarea
-              required
-              rows="5"
-              placeholder="Écrivez votre message ici..."
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-            />
+          <div className="contact-info-item">
+            <span className="contact-info-icone">✨</span>
+            <div>
+              <strong>Garantie Qualité</strong>
+              <div>Chaque pièce est contrôlée et emballée avec soin.</div>
+            </div>
+          </div>
+        </div>
 
-            <button type="submit" className="btn-valider" style={{ width: '100%', marginTop: '10px' }}>
-              Envoyer le message ✉️
-            </button>
-          </form>
-        )}
+        {/* Colonne de droite : Formulaire */}
+        <div className="contact-form-carte">
+          {envoye ? (
+            <div className="contact-confirmation">
+              <h3>✨ Merci pour votre message !</h3>
+              <p>Nous avons bien reçu votre demande et nous vous répondrons très rapidement.</p>
+              <button
+                className="btn-contact-envoyer"
+                onClick={() => setEnvoye(false)}
+              >
+                Envoyer un autre message
+              </button>
+            </div>
+          ) : (
+            <form onSubmit={gererEnvoi} className="contact-form">
+              <div className="contact-groupe">
+                <label>Votre nom complet :</label>
+                <input
+                  type="text"
+                  required
+                  placeholder="Ex. Sarah Martin"
+                  value={nom}
+                  onChange={(e) => setNom(e.target.value)}
+                />
+              </div>
 
-        <div style={{ marginTop: '25px', paddingTop: '15px', borderTop: '1px solid #eee', fontSize: '0.95rem', textAlign: 'center' }}>
-          <p><strong>Service Client AURELIA</strong></p>
-          <p>📧 Email : contact@aurelia-bijoux.com</p>
-          <p>🌍 Livraison internationale disponible</p>
+              <div className="contact-groupe">
+                <label>Votre adresse e-mail :</label>
+                <input
+                  type="email"
+                  required
+                  placeholder="Ex. sarah@email.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+
+              <div className="contact-groupe">
+                <label>Sujet :</label>
+                <input
+                  type="text"
+                  required
+                  placeholder="Question sur un bijou, suivi de commande..."
+                  value={sujet}
+                  onChange={(e) => setSujet(e.target.value)}
+                />
+              </div>
+
+              <div className="contact-groupe">
+                <label>Votre message :</label>
+                <textarea
+                  required
+                  rows="5"
+                  placeholder="Écrivez votre message ici..."
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                />
+              </div>
+
+              <button type="submit" className="btn-contact-envoyer">
+                Envoyer le message ✉️
+              </button>
+            </form>
+          )}
         </div>
       </div>
     </main>

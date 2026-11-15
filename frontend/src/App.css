@@ -521,3 +521,161 @@ body {
     letter-spacing: 2px;
   }
 }
+/* =========================================
+   PAGE CONTACT - AURELIA BIJOUX
+   ========================================= */
+
+.contact-page {
+  max-width: 950px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.contact-intro {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 40px auto;
+  color: #555;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.contact-grille {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 35px;
+  align-items: start;
+}
+
+/* Carte Informations (Gauche) */
+.contact-infos-carte {
+  background: #fdfbf7;
+  border: 1px solid #eadbc8;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+}
+
+.contact-infos-carte h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #2c2c2c;
+  font-size: 1.3rem;
+  border-bottom: 2px solid #d4af37;
+  padding-bottom: 10px;
+  display: inline-block;
+}
+
+.contact-info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 18px;
+  color: #444;
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+
+.contact-info-icone {
+  font-size: 1.3rem;
+  line-height: 1.2;
+}
+
+/* Carte Formulaire (Droite) */
+.contact-form-carte {
+  background: #ffffff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 35px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contact-groupe {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.contact-groupe label {
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: #333;
+}
+
+.contact-groupe input,
+.contact-groupe textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #d8d8d8;
+  border-radius: 8px;
+  font-size: 0.98rem;
+  font-family: inherit;
+  transition:
+    border-color 0.25s,
+    box-shadow 0.25s;
+  box-sizing: border-box;
+}
+
+.contact-groupe input:focus,
+.contact-groupe textarea:focus {
+  outline: none;
+  border-color: #d4af37;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+}
+
+.btn-contact-envoyer {
+  background: #1a1a1a;
+  color: #ffffff;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.25s,
+    transform 0.15s;
+  margin-top: 8px;
+}
+
+.btn-contact-envoyer:hover {
+  background: #d4af37;
+  color: #1a1a1a;
+  transform: translateY(-1px);
+}
+
+/* Message de confirmation */
+.contact-confirmation {
+  text-align: center;
+  padding: 35px 20px;
+}
+
+.contact-confirmation h3 {
+  color: #2e7d32;
+  margin-bottom: 10px;
+  font-size: 1.4rem;
+}
+
+.contact-confirmation p {
+  color: #555;
+  margin-bottom: 20px;
+}
+
+/* Adaptation Mobile & Tablette */
+@media (max-width: 768px) {
+  .contact-grille {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .contact-form-carte,
+  .contact-infos-carte {
+    padding: 22px;
+  }
+}
