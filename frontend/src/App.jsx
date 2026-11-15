@@ -25,7 +25,8 @@ export default function App() {
   const [ville, setVille] = useState('');
   const [adresse, setAdresse] = useState('');
 
-  const API_URL = "https://onrender.com";
+  const API_URL = "https://ma-boutique-api-bae2.onrender.com";
+
 
   const verifierConnexionAdmin = (e) => {
     e.preventDefault();
