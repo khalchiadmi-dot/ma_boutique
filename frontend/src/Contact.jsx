@@ -6,14 +6,35 @@ export default function Contact() {
   const [sujet, setSujet] = useState('');
   const [message, setMessage] = useState('');
   const [envoye, setEnvoye] = useState(false);
+  const [envoiEnCours, setEnvoiEnCours] = useState(false);
 
   const gererEnvoi = (e) => {
     e.preventDefault();
-    setEnvoye(true);
-    setNom('');
-    setEmail('');
-    setSujet('');
-    setMessage('');
+    if (envoiEnCours) return;
+    setEnvoiEnCours(true);
+
+    fetch("https://onrender.com", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ nom, email, sujet, message })
+    })
+      .then(async (r) => {
+        setEnvoiEnCours(false);
+        if (r.ok) {
+          setEnvoye(true);
+          setNom('');
+          setEmail('');
+          setSujet('');
+          setMessage('');
+        } else {
+          const err = await r.json().catch(() => ({}));
+          alert("⚠️ Erreur lors de l'envoi : " + (err.error || "Veuillez réessayer."));
+        }
+      })
+      .catch(() => {
+        setEnvoiEnCours(false);
+        alert("⚠️ Impossible de joindre le serveur (patientez 40s s'il sort de veille).");
+      });
   };
 
   return (
@@ -120,8 +141,12 @@ export default function Contact() {
                 />
               </div>
 
-              <button type="submit" className="btn-contact-envoyer">
-                Envoyer le message ✉️
+              <button
+                type="submit"
+                className="btn-contact-envoyer"
+                disabled={envoiEnCours}
+              >
+                {envoiEnCours ? "Envoi en cours..." : "Envoyer le message ✉️"}
               </button>
             </form>
           )}

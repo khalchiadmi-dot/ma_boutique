@@ -1,5 +1,7 @@
 import os
 import json
+import urllib.request
+import urllib.error
 from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
@@ -135,6 +137,56 @@ def creer_commande():
 def get_commandes():
     commandes = Commande.query.order_by(Commande.id.desc()).all()
     return jsonify([c.to_json() for c in commandes])
+
+# 6. Envoyer un message via Brevo (Page Contact)
+@app.route('/api/contact', methods=['POST'])
+def envoyer_contact():
+    donnees = request.json
+    nom = donnees.get('nom', '').strip()
+    email = donnees.get('email', '').strip()
+    sujet = donnees.get('sujet', '').strip()
+    message = donnees.get('message', '').strip()
+
+    brevo_api_key = os.environ.get('BREVO_API_KEY')
+    email_boutique = os.environ.get('EMAIL_BOUTIQUE')
+
+    if not brevo_api_key or not email_boutique:
+        return jsonify({"error": "Configuration Brevo manquante sur le serveur"}), 500
+
+    payload = {
+        "sender": {"name": "Boutique AURELIA", "email": email_boutique},
+        "to": [{"email": email_boutique, "name": "Admin AURELIA"}],
+        "replyTo": {"email": email, "name": nom},
+        "subject": f"[Contact AURELIA] {sujet}",
+        "htmlContent": f"""
+            <h3>Nouveau message reçu sur la boutique AURELIA</h3>
+            <p><strong>Nom :</strong> {nom}</p>
+            <p><strong>E-mail :</strong> {email}</p>
+            <p><strong>Sujet :</strong> {sujet}</p>
+            <p><strong>Message :</strong><br>{message}</p>
+        """
+    }
+
+    req = urllib.request.Request(
+        "https://brevo.com",
+        data=json.dumps(payload).encode('utf-8'),
+        headers={
+            "accept": "application/json",
+            "api-key": brevo_api_key,
+            "content-type": "application/json"
+        },
+        method="POST"
+    )
+
+    try:
+        with urllib.request.urlopen(req) as res:
+            if res.status in (200, 201, 202):
+                return jsonify({"message": "Succès"}), 200
+            return jsonify({"error": "Erreur Brevo"}), 500
+    except urllib.error.HTTPError as e:
+        return jsonify({"error": e.read().decode('utf-8')}), 500
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 # Création automatique des tables au démarrage
 with app.app_context():
