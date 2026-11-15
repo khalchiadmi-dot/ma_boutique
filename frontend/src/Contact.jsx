@@ -13,7 +13,7 @@ export default function Contact() {
     if (envoiEnCours) return;
     setEnvoiEnCours(true);
 
-    fetch("https://onrender.com", {
+    fetch("https://ma-boutique-api-bae2.onrender.com", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ nom, email, sujet, message })
