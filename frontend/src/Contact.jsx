@@ -81,7 +81,7 @@ export default function Contact() {
                 <input
                   type="text"
                   required
-                  placeholder="Ex. Zahra SABROU"
+                  placeholder="Ex. Zahra Sabrou"
                   value={nom}
                   onChange={(e) => setNom(e.target.value)}
                 />
