@@ -81,7 +81,7 @@ export default function Contact() {
                 <input
                   type="text"
                   required
-                  placeholder="Ex. Sarah Martin"
+                  placeholder="Ex. Zahra SABROU"
                   value={nom}
                   onChange={(e) => setNom(e.target.value)}
                 />
@@ -92,7 +92,7 @@ export default function Contact() {
                 <input
                   type="email"
                   required
-                  placeholder="Ex. sarah@email.com"
+                  placeholder="Ex. zahra@email.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
