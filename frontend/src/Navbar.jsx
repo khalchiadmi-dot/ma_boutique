@@ -50,6 +50,17 @@ export default function Navbar({
                 >
                   Notre Boutique (Vente)
                 </a>
+                 <a
+                  href="#contact"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setPageActive('contact');
+                    setVoirPanier(false);
+                    setMenuOuvert(false);
+                  }}
+                >
+                  Contact
+                </a>
               </div>
             )}
           </div>

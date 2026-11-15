@@ -3,6 +3,7 @@ import './App.css';
 import Navbar from './Navbar';
 import Accueil from './Accueil';
 import Admin from './Admin';
+import Contact from './Contact';
 
 export default function App() {
   const [produits, setProduits] = useState([]);
@@ -156,7 +157,12 @@ export default function App() {
         </main>
       ) : pageActive === 'accueil' ? (
         <Accueil />
-      ) : (
+      ) : pageActive === 'contact' ? (
+        <main className="contenu">
+          <Contact />
+        </main>
+      ) :
+       (
         <main className="contenu">
           <h2 className="titre-page">Notre Catalogue</h2>
           <div className="grille-produits">
