@@ -27,7 +27,6 @@ export default function App() {
 
   const API_URL = "https://ma-boutique-api-bae2.onrender.com";
 
-
   const verifierConnexionAdmin = (e) => {
     e.preventDefault();
     if (motDePasseSaisi === 'joujou') setEstConnecteAdmin(true);
@@ -94,13 +93,13 @@ export default function App() {
   return (
     <div className={modeAdmin ? "app-container admin-mode" : "app-container"}>
       <Navbar
-                modeAdmin={modeAdmin} setModeAdmin={setModeAdmin} setPageActive={setPageActive}
+        modeAdmin={modeAdmin} setModeAdmin={setModeAdmin}
+        pageActive={pageActive} setPageActive={setPageActive}
         panierCount={panier.length} totalPanier={totalPanier}
         voirPanier={voirPanier} setVoirPanier={setVoirPanier}
       />
 
-
-      {!modeAdmin && voirPanier && (
+      {!modeAdmin && pageActive !== 'accueil' && voirPanier && (
         <div className="panier-modal">
           {!etapeCommande ? (
             <>
