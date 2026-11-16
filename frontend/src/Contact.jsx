@@ -13,9 +13,8 @@ export default function Contact() {
     if (envoiEnCours) return;
     setEnvoiEnCours(true);
 
-  const serveur = "ma-boutique-api-bae2" + ".onrender.com";
-  const urlContact = "https://" + serveur + "/api/contact";
-
+    const serveur = "ma-boutique-api-bae2" + ".onrender.com";
+    const urlContact = "https://" + serveur + "/api/contact";
 
     fetch(urlContact, {
       method: "POST",
