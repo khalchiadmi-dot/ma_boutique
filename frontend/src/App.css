@@ -56,6 +56,7 @@ header h1,
   letter-spacing: 3px;
   background: linear-gradient(135deg, #2c241b 0%, #b5893e 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -138,6 +139,7 @@ nav button:hover,
   margin-bottom: 18px;
   background: linear-gradient(135deg, #2c241b 10%, #a87d36 90%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -290,6 +292,7 @@ nav button:hover,
   margin-bottom: 12px;
   background: linear-gradient(135deg, #2c241b 0%, #9e7738 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
