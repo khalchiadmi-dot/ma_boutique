@@ -11,7 +11,6 @@ app = Flask(__name__)
 # Autorise le frontend React à communiquer avec le serveur (GET, POST, DELETE, OPTIONS)
 CORS(app, resources={r"/*": {"origins": "*"}}, allow_headers=["Content-Type"], methods=["GET", "POST", "DELETE", "OPTIONS"])
 
-
 # Adresse Supabase IPv4 assemblée proprement avec le nouveau mot de passe
 hote_supabase = "aws-1-eu-west-1.pooler." + "supabase.com"
 DATABASE_URL = f"postgresql://postgres.amkhrovkelodfcevsqba:BoutiqueJohara2026@{hote_supabase}:5432/postgres"
@@ -140,7 +139,6 @@ def get_commandes():
     return jsonify([c.to_json() for c in commandes])
 
 # 6. Envoyer un message via Brevo (Page Contact)
-# 6. Envoyer un message via Brevo (Page Contact)
 @app.route('/api/contact', methods=['POST'])
 def envoyer_contact():
     donnees = request.json
@@ -149,15 +147,16 @@ def envoyer_contact():
     sujet = donnees.get('sujet', '').strip()
     message = donnees.get('message', '').strip()
 
-    brevo_api_key = os.environ.get('BREVO_API_KEY')
-    email_boutique = os.environ.get('EMAIL_BOUTIQUE')
+    brevo_api_key = os.environ.get('BREVO_API_KEY', '').strip()
+    email_boutique = os.environ.get('EMAIL_BOUTIQUE', '').strip()
+    email_reception = os.environ.get('ADRESSE_HOTMAIL', email_boutique).strip()
 
     if not brevo_api_key or not email_boutique:
         return jsonify({"error": "Configuration Brevo manquante sur le serveur"}), 500
 
     payload = {
         "sender": {"name": "Boutique AURELIA", "email": email_boutique},
-        "to": [{"email": email_boutique, "name": "Admin AURELIA"}],
+        "to": [{"email": email_reception, "name": "Admin AURELIA"}],
         "replyTo": {"email": email, "name": nom},
         "subject": f"[Contact AURELIA] {sujet}",
         "htmlContent": f"""
@@ -169,7 +168,9 @@ def envoyer_contact():
         """
     }
 
-    url_brevo = "https://" + "://brevo.com" + "/v3/smtp/email"
+    domaine_brevo = "api." + "brevo" + ".com"
+    url_brevo = "https://" + domaine_brevo + "/v3/smtp/email"
+
     req = urllib.request.Request(
         url_brevo,
         data=json.dumps(payload).encode('utf-8'),
@@ -190,7 +191,6 @@ def envoyer_contact():
         return jsonify({"error": e.read().decode('utf-8')}), 500
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
 
 # Création automatique des tables au démarrage
 with app.app_context():
