@@ -13,9 +13,10 @@ export default function Contact() {
     if (envoiEnCours) return;
     setEnvoiEnCours(true);
 
-    const urlContact = "https://onrender.com" + "/api/contact";
+        const serveur = "ma-boutique-api-bae2" + ".onrender.com";
+    const urlContact = "https://" + serveur + "/api/contact";
 
-    fetch(urlContact, {
+     fetch(urlContact, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ nom, email, sujet, message })
