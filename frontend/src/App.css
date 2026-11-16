@@ -180,7 +180,6 @@ h3,
   font-size: 0.95rem;
   box-shadow: 0 6px 16px rgba(140, 99, 34, 0.25);
 }
-
 .hero-accueil {
   flex: 1;
   display: flex;
@@ -239,6 +238,7 @@ h3,
   color: var(--or-profond);
   font-weight: 600;
 }
+
 .contenu {
   max-width: 1180px;
   width: 100%;
@@ -402,7 +402,6 @@ h3,
   background: #ffffff;
   font-family: inherit;
 }
-
 .contact-page {
   background: linear-gradient(
     145deg,
