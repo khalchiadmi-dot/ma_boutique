@@ -9,7 +9,8 @@ from flask_cors import CORS
 app = Flask(__name__)
 
 # Autorise le frontend React à communiquer avec le serveur (GET, POST, DELETE, OPTIONS)
-CORS(app, resources={r"/api/*": {"origins": "*", "methods": ["GET", "POST", "DELETE", "OPTIONS"]}})
+CORS(app, resources={r"/*": {"origins": "*"}}, allow_headers=["Content-Type"], methods=["GET", "POST", "DELETE", "OPTIONS"])
+
 
 # Adresse Supabase IPv4 assemblée proprement avec le nouveau mot de passe
 hote_supabase = "aws-1-eu-west-1.pooler." + "supabase.com"
@@ -139,6 +140,7 @@ def get_commandes():
     return jsonify([c.to_json() for c in commandes])
 
 # 6. Envoyer un message via Brevo (Page Contact)
+# 6. Envoyer un message via Brevo (Page Contact)
 @app.route('/api/contact', methods=['POST'])
 def envoyer_contact():
     donnees = request.json
@@ -167,8 +169,9 @@ def envoyer_contact():
         """
     }
 
+    url_brevo = "https://" + "://brevo.com" + "/v3/smtp/email"
     req = urllib.request.Request(
-        "https://brevo.com",
+        url_brevo,
         data=json.dumps(payload).encode('utf-8'),
         headers={
             "accept": "application/json",
@@ -187,6 +190,7 @@ def envoyer_contact():
         return jsonify({"error": e.read().decode('utf-8')}), 500
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
 
 # Création automatique des tables au démarrage
 with app.app_context():

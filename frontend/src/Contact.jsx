@@ -13,7 +13,9 @@ export default function Contact() {
     if (envoiEnCours) return;
     setEnvoiEnCours(true);
 
-    fetch("https://ma-boutique-api-bae2.onrender.com", {
+    const urlContact = "https://onrender.com" + "/api/contact";
+
+    fetch(urlContact, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ nom, email, sujet, message })
@@ -31,12 +33,10 @@ export default function Contact() {
           alert("⚠️ Erreur lors de l'envoi : " + (err.error || "Veuillez réessayer."));
         }
       })
-      
-           .catch((erreur) => {
+      .catch((erreur) => {
         setEnvoiEnCours(false);
         alert("⚠️ Détail erreur : " + erreur.message);
       });
-
   };
 
   return (
