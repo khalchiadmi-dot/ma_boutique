@@ -35,6 +35,17 @@ body {
   min-height: 100vh;
 }
 
+h1,
+h2,
+h3,
+.logo-texte,
+.hero-titre,
+.hero-sous-titre,
+.titre-page,
+.carte-produit .prix {
+  font-family: var(--police-luxe);
+}
+
 .app-container {
   min-height: 100vh;
   display: flex;
@@ -231,9 +242,9 @@ body {
 }
 
 .hero-sous-titre {
-  font-size: 1.2rem;
-  letter-spacing: 3px;
-  text-transform: uppercase;
+  font-style: italic;
+  font-size: 1.35rem;
+  letter-spacing: 2px;
   color: var(--or-profond);
   font-weight: 600;
 }
@@ -257,70 +268,77 @@ body {
 }
 
 .grille-produits {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
-  gap: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  max-width: 520px;
+  margin: 0 auto;
 }
 
 .carte-produit {
+  width: 100%;
   background: linear-gradient(180deg, #ffffff 0%, #faf1e2 100%);
   border: 1px solid var(--bordure-or);
-  border-radius: 20px;
-  padding: 18px;
+  border-radius: 18px;
+  padding: 16px;
   box-shadow: var(--ombre-carte);
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
   transition:
     transform 0.25s ease,
     box-shadow 0.25s ease;
 }
 
 .carte-produit:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 42px rgba(68, 49, 22, 0.18);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 32px rgba(68, 49, 22, 0.16);
 }
 
 .carte-produit img {
   width: 100%;
-  height: 230px;
+  max-width: 240px;
+  height: 180px;
   object-fit: cover;
-  border-radius: 14px;
-  margin-bottom: 16px;
+  border-radius: 12px;
+  margin-bottom: 12px;
   background: #f5ebd9;
 }
 
 .carte-produit h3 {
-  font-size: 1.18rem;
+  font-size: 1.2rem;
   color: var(--brun-encre);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .carte-produit p {
-  font-size: 0.93rem;
+  font-size: 0.9rem;
   color: var(--texte-secondaire);
-  line-height: 1.5;
-  margin-bottom: 14px;
-  flex-grow: 1;
+  line-height: 1.45;
+  margin-bottom: 10px;
 }
 
 .carte-produit .prix {
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   font-weight: 800;
   color: var(--or-profond);
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 
 .btn-ajouter {
   width: 100%;
-  padding: 13px;
+  max-width: 260px;
+  padding: 11px 18px;
   border: none;
-  border-radius: 12px;
+  border-radius: 10px;
   font-weight: 700;
-  font-size: 0.96rem;
+  font-size: 0.94rem;
   color: #ffffff;
   background: linear-gradient(135deg, #cfa960 0%, #9e732d 100%);
   cursor: pointer;
-  box-shadow: 0 6px 16px rgba(158, 115, 45, 0.25);
+  box-shadow: 0 6px 14px rgba(158, 115, 45, 0.22);
 }
 
 .panier-modal {
@@ -511,7 +529,6 @@ body {
   border-radius: 12px;
   cursor: pointer;
 }
-
 .contact-confirmation {
   text-align: center;
   padding: 38px 20px;
