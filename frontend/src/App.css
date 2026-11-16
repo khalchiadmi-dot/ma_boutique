@@ -1,15 +1,18 @@
 :root {
-  --fond-debut: #f7f0e4;
-  --fond-milieu: #ede0cb;
-  --fond-fin: #e2cfb1;
-  --or-clair: #d9b673;
-  --or-moyen: #b5893e;
-  --or-profond: #8c6322;
-  --brun-encre: #261e16;
-  --texte-secondaire: #594e42;
-  --bordure-or: rgba(181, 137, 62, 0.3);
-  --ombre-carte: 0 14px 36px rgba(68, 49, 22, 0.12);
-  --police-luxe: "Gambetta", Georgia, serif;
+  /* Dégradé de fond (remplace le beige/crème) */
+  --fond-debut: #f0f6fc;
+  --fond-milieu: #dce9f7;
+  --fond-fin: #c6dcf2;
+
+  /* Accents bleus (remplacent les tons dorés) */
+  --bleu-clair: #73a9d9;
+  --bleu-moyen: #3e7cb5;
+  --bleu-profond: #22558c;
+
+  /* Textes et bordures */
+  --bleu-encre: #161e26;
+  --texte-secondaire: #424e59;
+  --bordure-bleue: rgba(62, 124, 181, 0.3);
 }
 
 * {
