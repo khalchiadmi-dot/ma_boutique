@@ -9,6 +9,7 @@
   --texte-secondaire: #594e42;
   --bordure-or: rgba(181, 137, 62, 0.3);
   --ombre-carte: 0 14px 36px rgba(68, 49, 22, 0.12);
+  --police-luxe: "Gambetta", Georgia, serif;
 }
 
 * {
