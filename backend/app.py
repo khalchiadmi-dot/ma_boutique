@@ -11,8 +11,11 @@ app = Flask(__name__)
 # Autorise le frontend React à communiquer avec le serveur (GET, POST, DELETE, OPTIONS)
 CORS(app, resources={r"/*": {"origins": "*"}}, allow_headers=["Content-Type"], methods=["GET", "POST", "DELETE", "OPTIONS"])
 
-# Adresse Supabase IPv4 assemblée proprement avec le nouveau mot de passe
-DATABASE_URL = os.environ.get('DATABASE_URL', '').strip()
+# Adresshote_supabase = "aws-1-eu-west-1.pooler." + "supabase.com"
+hote_supabase = "aws-1-eu-west-1.pooler." + "supabase.com"
+mot_de_passe_db = os.environ.get('DB_PASSWORD', '').strip()
+DATABASE_URL = f"postgresql://postgres.amkhrovkelodfcevsqba:{mot_de_passe_db}@{hote_supabase}:5432/postgres"
+
 
 
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
