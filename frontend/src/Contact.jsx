@@ -31,10 +31,12 @@ export default function Contact() {
           alert("⚠️ Erreur lors de l'envoi : " + (err.error || "Veuillez réessayer."));
         }
       })
-      .catch(() => {
+      
+           .catch((erreur) => {
         setEnvoiEnCours(false);
-        alert("⚠️ Impossible de joindre le serveur (patientez 40s s'il sort de veille).");
+        alert("⚠️ Détail erreur : " + erreur.message);
       });
+
   };
 
   return (
