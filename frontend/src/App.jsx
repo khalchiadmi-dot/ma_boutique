@@ -168,7 +168,12 @@ export default function App() {
           <div className="grille-produits">
             {produits.map(p => (
               <div key={p.id} className="carte-produit">
-                <img src={p.image_url || "/images/AURELIA1.png"} alt={p.nom} />
+                {p.image_url && p.image_url.toLowerCase().endsWith('.mp4') ? (
+             <video src={p.image_url} autoPlay loop muted playsInline />
+           ) : (
+  <img src={p.image_url || "/images/AURELIA1.png"} alt={p.nom} />
+       )}
+
                 <h3>{p.nom}</h3>
                 <p>{p.description}</p>
                 <div className="prix">{Number(p.prix).toFixed(2)} €</div>
