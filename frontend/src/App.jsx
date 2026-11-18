@@ -4,6 +4,7 @@ import Navbar from './Navbar';
 import Accueil from './Accueil';
 import Admin from './Admin';
 import Contact from './Contact';
+import Suivi from './Suivi'
 
 export default function App() {
   const [produits, setProduits] = useState([]);
@@ -161,8 +162,11 @@ export default function App() {
         <main className="contenu">
           <Contact />
         </main>
-      ) :
-       (
+      ) : pageActive === 'suivi' ? (
+        <main className="contenu">
+          <Suivi API_URL={API_URL} />
+        </main>
+      ) : (
         <main className="contenu">
           <h2 className="titre-page">Notre Catalogue</h2>
           <div className="grille-produits">
