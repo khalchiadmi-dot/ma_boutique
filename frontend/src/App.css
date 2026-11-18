@@ -376,14 +376,19 @@ h3,
 }
 /* --- PANIER & BOUTONS --- */
 .panier-modal {
-  max-width: 540px;
+  position: fixed;
+  top: 82px;
+  right: 20px;
+  max-width: 420px;
   width: 92%;
-  margin: 24px auto 0;
-  padding: 28px;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 26px;
   background: linear-gradient(180deg, #ffffff 0%, #eef5fc 100%);
   border: 1px solid var(--bordure-bleue);
   border-radius: 20px;
-  box-shadow: 0 20px 48px rgba(22, 30, 38, 0.18);
+  box-shadow: 0 20px 48px rgba(22, 30, 38, 0.25);
+  z-index: 1200;
 }
 
 .panier-modal h3 {
