@@ -14,8 +14,23 @@ export default function Admin({
   setNouvelleDesc,
   produits,
   gererSuppressionProduit,
-  commandesAdmin
+  commandesAdmin,
+  chargerCommandesAdmin,
+  API_URL
 }) {
+  const changerStatut = (id, nouveauStatut) => {
+    fetch(`${API_URL}/api/commandes/${id}/statut`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ statut: nouveauStatut })
+    })
+      .then((r) => r.json())
+      .then(() => {
+        if (chargerCommandesAdmin) chargerCommandesAdmin();
+      })
+      .catch(console.error);
+  };
+
   if (!estConnecteAdmin) {
     return (
       <div className="admin-card" style={{ maxWidth: '350px', margin: '50px auto', textAlign: 'center' }}>
@@ -47,7 +62,7 @@ export default function Admin({
             <input type="text" required value={nouveauNom} onChange={(e) => setNouveauNom(e.target.value)} />
             <label>Prix (€) :</label>
             <input type="number" step="0.01" required value={nouveauPrix} onChange={(e) => setNouveauPrix(e.target.value)} />
-            <label>Image (URL) :</label>
+            <label>Image ou Vidéo (.mp4) :</label>
             <input type="text" value={nouvelleImg} onChange={(e) => setNouvelleImg(e.target.value)} />
             <label>Description :</label>
             <textarea value={nouvelleDesc} onChange={(e) => setNouvelleDesc(e.target.value)} />
@@ -56,18 +71,26 @@ export default function Admin({
             </button>
           </form>
 
-          <hr style={{ margin: '20px 0', border: '0', borderTop: '1px solid #eee' }} />
+          <hr style={{ margin: '20px 0', border: '0', borderTop: '1px solid var(--bordure-bleue)' }} />
           <h3>🗑️ Articles en vitrine</h3>
-          <ul className="liste-panier" style={{ maxHeight: '200px' }}>
+          <ul className="liste-panier" style={{ maxHeight: '250px', overflowY: 'auto' }}>
             {produits.map((p) => (
               <li key={p.id} className="item-panier" style={{ alignItems: 'center' }}>
                 <span>{p.nom} ({p.prix} €)</span>
                 <button
+                  type="button"
                   onClick={() => gererSuppressionProduit(p.id)}
-                  className="btn-secondaire"
-                  style={{ flex: 'none', padding: '4px 8px' }}
+                  style={{
+                    backgroundColor: '#d9534f',
+                    color: '#ffffff',
+                    border: 'none',
+                    borderRadius: '6px',
+                    padding: '6px 12px',
+                    fontWeight: 'bold',
+                    cursor: 'pointer'
+                  }}
                 >
-                  X
+                  Supprimer
                 </button>
               </li>
             ))}
@@ -84,6 +107,7 @@ export default function Admin({
                   <th>Client</th>
                   <th>Ville</th>
                   <th>Total</th>
+                  <th>Statut</th>
                 </tr>
               </thead>
               <tbody>
@@ -93,6 +117,22 @@ export default function Admin({
                     <td>{c.nom_client}<br /><small>{c.telephone}</small></td>
                     <td>{c.ville}</td>
                     <td><strong>{c.total} €</strong></td>
+                    <td>
+                      <select
+                        value={c.statut || "En préparation"}
+                        onChange={(e) => changerStatut(c.id, e.target.value)}
+                        style={{
+                          padding: '6px',
+                          borderRadius: '8px',
+                          border: '1px solid var(--bordure-bleue)',
+                          background: '#ffffff'
+                        }}
+                      >
+                        <option value="En préparation">⏳ En préparation</option>
+                        <option value="Expédiée">🚚 Expédiée</option>
+                        <option value="Livrée">✅ Livrée</option>
+                      </select>
+                    </td>
                   </tr>
                 ))}
               </tbody>

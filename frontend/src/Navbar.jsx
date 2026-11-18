@@ -50,7 +50,18 @@ export default function Navbar({
                 >
                   Notre Boutique (Vente)
                 </a>
-                 <a
+                <a
+                  href="#suivi"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setPageActive('suivi');
+                    setVoirPanier(false);
+                    setMenuOuvert(false);
+                  }}
+                >
+                  📦 Suivi de commande
+                </a>
+                <a
                   href="#contact"
                   onClick={(e) => {
                     e.preventDefault();
