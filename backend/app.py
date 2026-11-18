@@ -14,42 +14,7 @@ BREVO_API_KEY = os.environ.get("BREVO_API_KEY")
 ADMIN_EMAIL = os.environ.get("ADMIN_EMAIL", "contact@aurelia.com")
 
 def get_db():
-    return psycopg.connect(DATABASE_URL)
-
-def init_db():
-    if not DATABASE_URL:
-        return
-    with get_db() as conn:
-        with conn.cursor() as cur:
-            cur.execute("""
-                CREATE TABLE IF NOT EXISTS produits (
-                    id SERIAL PRIMARY KEY,
-                    nom VARCHAR(255) NOT NULL,
-                    prix NUMERIC(10, 2) NOT NULL,
-                    description TEXT,
-                    image_url TEXT
-                );
-            """)
-            cur.execute("""
-                CREATE TABLE IF NOT EXISTS commandes (
-                    id SERIAL PRIMARY KEY,
-                    nom_client VARCHAR(255) NOT NULL,
-                    telephone VARCHAR(50) NOT NULL,
-                    ville VARCHAR(255) NOT NULL,
-                    adresse TEXT NOT NULL,
-                    total NUMERIC(10, 2) NOT NULL,
-                    articles TEXT,
-                    statut VARCHAR(50) DEFAULT 'En préparation',
-                    date_commande TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                );
-            """)
-            cur.execute("ALTER TABLE commandes ADD COLUMN IF NOT EXISTS statut VARCHAR(50) DEFAULT 'En préparation';")
-        conn.commit()
-
-try:
-    init_db()
-except Exception as e:
-    print("Erreur init_db:", e)
+    return psycopg.connect(DATABASE_URL, connect_timeout=5)
 
 @app.route('/')
 def home():
@@ -197,5 +162,5 @@ def envoyer_contact():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 5000))
+    port = int(os.environ.get("PORT", 10000))
     app.run(host='0.0.0.0', port=port)
