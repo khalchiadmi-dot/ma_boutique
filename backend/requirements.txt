@@ -1,5 +1,5 @@
-Flask
-Flask-SQLAlchemy
+flask
 flask-cors
-psycopg[binary]
 gunicorn
+psycopg2-binary
+

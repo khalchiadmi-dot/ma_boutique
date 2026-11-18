@@ -3,8 +3,8 @@ import json
 import urllib.request
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-import psycopg2
-from psycopg2.extras import RealDictCursor
+import psycopg
+from psycopg.rows import dict_row
 
 app = Flask(__name__)
 CORS(app)
@@ -14,39 +14,37 @@ BREVO_API_KEY = os.environ.get("BREVO_API_KEY")
 ADMIN_EMAIL = os.environ.get("ADMIN_EMAIL", "contact@aurelia.com")
 
 def get_db():
-    return psycopg2.connect(DATABASE_URL)
+    return psycopg.connect(DATABASE_URL)
 
 def init_db():
     if not DATABASE_URL:
         return
-    conn = get_db()
-    cur = conn.cursor()
-    cur.execute("""
-        CREATE TABLE IF NOT EXISTS produits (
-            id SERIAL PRIMARY KEY,
-            nom VARCHAR(255) NOT NULL,
-            prix NUMERIC(10, 2) NOT NULL,
-            description TEXT,
-            image_url TEXT
-        );
-    """)
-    cur.execute("""
-        CREATE TABLE IF NOT EXISTS commandes (
-            id SERIAL PRIMARY KEY,
-            nom_client VARCHAR(255) NOT NULL,
-            telephone VARCHAR(50) NOT NULL,
-            ville VARCHAR(255) NOT NULL,
-            adresse TEXT NOT NULL,
-            total NUMERIC(10, 2) NOT NULL,
-            articles TEXT,
-            statut VARCHAR(50) DEFAULT 'En préparation',
-            date_commande TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        );
-    """)
-    cur.execute("ALTER TABLE commandes ADD COLUMN IF NOT EXISTS statut VARCHAR(50) DEFAULT 'En préparation';")
-    conn.commit()
-    cur.close()
-    conn.close()
+    with get_db() as conn:
+        with conn.cursor() as cur:
+            cur.execute("""
+                CREATE TABLE IF NOT EXISTS produits (
+                    id SERIAL PRIMARY KEY,
+                    nom VARCHAR(255) NOT NULL,
+                    prix NUMERIC(10, 2) NOT NULL,
+                    description TEXT,
+                    image_url TEXT
+                );
+            """)
+            cur.execute("""
+                CREATE TABLE IF NOT EXISTS commandes (
+                    id SERIAL PRIMARY KEY,
+                    nom_client VARCHAR(255) NOT NULL,
+                    telephone VARCHAR(50) NOT NULL,
+                    ville VARCHAR(255) NOT NULL,
+                    adresse TEXT NOT NULL,
+                    total NUMERIC(10, 2) NOT NULL,
+                    articles TEXT,
+                    statut VARCHAR(50) DEFAULT 'En préparation',
+                    date_commande TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                );
+            """)
+            cur.execute("ALTER TABLE commandes ADD COLUMN IF NOT EXISTS statut VARCHAR(50) DEFAULT 'En préparation';")
+        conn.commit()
 
 try:
     init_db()
@@ -60,12 +58,10 @@ def home():
 # --- PRODUITS ---
 @app.route('/api/produits', methods=['GET'])
 def get_produits():
-    conn = get_db()
-    cur = conn.cursor(cursor_factory=RealDictCursor)
-    cur.execute("SELECT * FROM produits ORDER BY id DESC;")
-    produits = cur.fetchall()
-    cur.close()
-    conn.close()
+    with get_db() as conn:
+        with conn.cursor(row_factory=dict_row) as cur:
+            cur.execute("SELECT * FROM produits ORDER BY id DESC;")
+            produits = cur.fetchall()
     for p in produits:
         p['prix'] = float(p['prix'])
     return jsonify(produits)
@@ -81,37 +77,32 @@ def add_produit():
     if not nom or prix is None:
         return jsonify({"error": "Nom et prix obligatoires"}), 400
 
-    conn = get_db()
-    cur = conn.cursor()
-    cur.execute(
-        "INSERT INTO produits (nom, prix, description, image_url) VALUES (%s, %s, %s, %s) RETURNING id;",
-        (nom, float(prix), description, image_url)
-    )
-    new_id = cur.fetchone()[0]
-    conn.commit()
-    cur.close()
-    conn.close()
+    with get_db() as conn:
+        with conn.cursor() as cur:
+            cur.execute(
+                "INSERT INTO produits (nom, prix, description, image_url) VALUES (%s, %s, %s, %s) RETURNING id;",
+                (nom, float(prix), description, image_url)
+            )
+            row = cur.fetchone()
+            new_id = row[0] if row else None
+        conn.commit()
     return jsonify({"message": "Produit ajouté", "id": new_id}), 201
 
 @app.route('/api/produits/<int:produit_id>', methods=['DELETE'])
 def delete_produit(produit_id):
-    conn = get_db()
-    cur = conn.cursor()
-    cur.execute("DELETE FROM produits WHERE id = %s;", (produit_id,))
-    conn.commit()
-    cur.close()
-    conn.close()
+    with get_db() as conn:
+        with conn.cursor() as cur:
+            cur.execute("DELETE FROM produits WHERE id = %s;", (produit_id,))
+        conn.commit()
     return jsonify({"message": "Produit supprimé"})
 
 # --- COMMANDES ---
 @app.route('/api/commandes', methods=['GET'])
 def get_commandes():
-    conn = get_db()
-    cur = conn.cursor(cursor_factory=RealDictCursor)
-    cur.execute("SELECT * FROM commandes ORDER BY id DESC;")
-    commandes = cur.fetchall()
-    cur.close()
-    conn.close()
+    with get_db() as conn:
+        with conn.cursor(row_factory=dict_row) as cur:
+            cur.execute("SELECT * FROM commandes ORDER BY id DESC;")
+            commandes = cur.fetchall()
     for c in commandes:
         c['total'] = float(c['total'])
     return jsonify(commandes)
@@ -126,20 +117,19 @@ def create_commande():
     total = data.get('total', 0)
     articles = json.dumps(data.get('articles', []), ensure_ascii=False)
 
-    conn = get_db()
-    cur = conn.cursor()
-    cur.execute(
-        """
-        INSERT INTO commandes (nom_client, telephone, ville, adresse, total, articles, statut)
-        VALUES (%s, %s, %s, %s, %s, %s, 'En préparation')
-        RETURNING id;
-        """,
-        (nom_client, telephone, ville, adresse, float(total), articles)
-    )
-    commande_id = cur.fetchone()[0]
-    conn.commit()
-    cur.close()
-    conn.close()
+    with get_db() as conn:
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                INSERT INTO commandes (nom_client, telephone, ville, adresse, total, articles, statut)
+                VALUES (%s, %s, %s, %s, %s, %s, 'En préparation')
+                RETURNING id;
+                """,
+                (nom_client, telephone, ville, adresse, float(total), articles)
+            )
+            row = cur.fetchone()
+            commande_id = row[0] if row else None
+        conn.commit()
     return jsonify({"message": "Succès", "commande_id": commande_id}), 201
 
 # --- SUIVI DE COMMANDE ---
@@ -147,26 +137,22 @@ def create_commande():
 def modifier_statut_commande(commande_id):
     data = request.get_json()
     nouveau_statut = data.get('statut', 'En préparation')
-    conn = get_db()
-    cur = conn.cursor()
-    cur.execute("UPDATE commandes SET statut = %s WHERE id = %s;", (nouveau_statut, commande_id))
-    conn.commit()
-    cur.close()
-    conn.close()
+    with get_db() as conn:
+        with conn.cursor() as cur:
+            cur.execute("UPDATE commandes SET statut = %s WHERE id = %s;", (nouveau_statut, commande_id))
+        conn.commit()
     return jsonify({"message": "Statut mis à jour"})
 
 @app.route('/api/suivi/<int:commande_id>', methods=['GET'])
 def suivre_commande(commande_id):
     telephone = request.args.get('telephone', '').strip()
-    conn = get_db()
-    cur = conn.cursor(cursor_factory=RealDictCursor)
-    cur.execute(
-        "SELECT id, nom_client, ville, total, statut FROM commandes WHERE id = %s AND telephone = %s;",
-        (commande_id, telephone)
-    )
-    commande = cur.fetchone()
-    cur.close()
-    conn.close()
+    with get_db() as conn:
+        with conn.cursor(row_factory=dict_row) as cur:
+            cur.execute(
+                "SELECT id, nom_client, ville, total, statut FROM commandes WHERE id = %s AND telephone = %s;",
+                (commande_id, telephone)
+            )
+            commande = cur.fetchone()
 
     if not commande:
         return jsonify({"error": "Aucune commande trouvée avec ce numéro et ce téléphone."}), 404
