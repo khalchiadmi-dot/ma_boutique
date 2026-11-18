@@ -522,3 +522,85 @@ h3,
   color: var(--bleu-profond);
   font-weight: 700;
 }
+/* --- ADAPTATION MOBILE (MODE GSM UNIQUEMENT) --- */
+@media (max-width: 768px) {
+  /* 1. Réduire le titre AURELIA sur l'accueil pour voir toutes les lettres */
+  .hero-contenu {
+    padding: 36px 16px;
+  }
+
+  .hero-titre {
+    font-size: 1.9rem;
+    letter-spacing: 3px;
+    word-break: break-word;
+  }
+
+  .hero-sous-titre {
+    font-size: 1.05rem;
+    letter-spacing: 1px;
+  }
+
+  .hero-logo-central {
+    width: 130px;
+    height: 130px;
+  }
+
+  /* 2. Empêcher le panier d'écraser le logo dans la navbar */
+  .navbar {
+    padding: 10px 12px;
+    gap: 8px;
+  }
+
+  .navbar-gauche {
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .logo {
+    gap: 8px;
+  }
+
+  .logo-img {
+    width: 34px;
+    height: 34px;
+  }
+
+  .logo-texte {
+    font-size: 1.05rem;
+    letter-spacing: 1px;
+  }
+
+  .logo-texte-slogan {
+    display: none; /* Masque le petit slogan sur mobile pour libérer de la place */
+  }
+
+  .panier-status {
+    padding: 7px 12px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* 3. Agrandir les champs d'écriture dans la page Contact */
+  .contenu {
+    padding: 24px 12px 50px;
+  }
+
+  .contact-page {
+    width: 100%;
+    padding: 20px 14px;
+  }
+
+  .contact-page input,
+  .contact-page textarea,
+  .form-livraison input,
+  .form-livraison textarea {
+    width: 100%;
+    font-size: 16px; /* Évite le zoom automatique sur iPhone/Android */
+    padding: 14px;
+  }
+
+  .contact-page textarea {
+    min-height: 140px;
+  }
+}
