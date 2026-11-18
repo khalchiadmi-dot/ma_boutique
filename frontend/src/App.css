@@ -546,39 +546,37 @@ h3,
   }
 
   /* 2. Empêcher le panier d'écraser le logo dans la navbar */
+  /* 2. Placer le panier un cran en dessous du logo sur mobile */
   .navbar {
-    padding: 10px 12px;
-    gap: 8px;
+    flex-wrap: wrap;
+    padding: 12px 14px;
+    gap: 10px;
   }
 
   .navbar-gauche {
-    gap: 8px;
-    min-width: 0;
-  }
-
-  .logo {
-    gap: 8px;
+    width: 100%;
+    justify-content: space-between;
   }
 
   .logo-img {
-    width: 34px;
-    height: 34px;
+    width: 36px;
+    height: 36px;
   }
 
   .logo-texte {
-    font-size: 1.05rem;
-    letter-spacing: 1px;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
   }
 
   .logo-texte-slogan {
-    display: none; /* Masque le petit slogan sur mobile pour libérer de la place */
+    display: none;
   }
 
   .panier-status {
-    padding: 7px 12px;
-    font-size: 0.8rem;
-    white-space: nowrap;
-    flex-shrink: 0;
+    width: 100%;
+    text-align: center;
+    padding: 9px 14px;
+    font-size: 0.9rem;
   }
 
   /* 3. Agrandir les champs d'écriture dans la page Contact */
