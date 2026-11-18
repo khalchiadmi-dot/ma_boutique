@@ -145,7 +145,7 @@ export default function App() {
         </div>
       )}
 
-      {modeAdmin ? (
+          {modeAdmin ? (
         <main className="contenu">
           <Admin
             estConnecteAdmin={estConnecteAdmin} verifierConnexionAdmin={verifierConnexionAdmin}
@@ -153,10 +153,13 @@ export default function App() {
             gererAjoutProduit={gererAjoutProduit} nouveauNom={nouveauNom} setNouveauNom={setNouveauNom}
             nouveauPrix={nouveauPrix} setNouveauPrix={setNouveauPrix} nouvelleImg={nouvelleImg}
             setNouvelleImg={setNouvelleImg} nouvelleDesc={nouvelleDesc} setNouvelleDesc={setNouvelleDesc}
-            produits={produits} gererSuppressionProduit={gererSuppressionProduit} commandesAdmin={commandesAdmin}
+            produits={produits} gererSuppressionProduit={gererSuppressionProduit}
+            commandesAdmin={commandesAdmin} chargerCommandesAdmin={chargerCommandesAdmin}
+            API_URL={API_URL}
           />
         </main>
       ) : pageActive === 'accueil' ? (
+
         <Accueil />
       ) : pageActive === 'contact' ? (
         <main className="contenu">
