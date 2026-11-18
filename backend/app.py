@@ -32,8 +32,7 @@ def get_produits():
                 cur.execute("SELECT * FROM produits ORDER BY id DESC;")
                 produits = cur.fetchall()
         for p in produits:
-            p['' \
-            'prix'] = float(p['prix'])
+            p['prix'] = float(p['prix'])
         return jsonify(produits)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
@@ -170,11 +169,10 @@ def envoyer_contact():
         "htmlContent": f"<p><strong>Nom :</strong> {nom}</p><p><strong>Email :</strong> {email}</p><p><strong>Message :</strong><br>{message}</p>"
     }
 
-req = urllib.request.Request(
-        "https://brevo.com",
+    brevo_url = "https://api." + "://brevo.com"
+    req = urllib.request.Request(
+        brevo_url,
         data=json.dumps(payload).encode('utf-8'),
-
-
         headers={
             "accept": "application/json",
             "api-key": BREVO_API_KEY,
