@@ -96,6 +96,7 @@ def create_commande():
         telephone = data.get('telephone')
         ville = data.get('ville')
         adresse = data.get('adresse')
+        mode_paiement = data.get('mode_paiement', 'Paiement à la livraison')
         total = data.get('total', 0)
         articles = json.dumps(data.get('articles', []), ensure_ascii=False)
 
@@ -103,11 +104,11 @@ def create_commande():
             with conn.cursor() as cur:
                 cur.execute(
                     """
-                    INSERT INTO commandes (nom_client, telephone, ville, adresse, total, articles, statut)
-                    VALUES (%s, %s, %s, %s, %s, %s, 'En préparation')
+                    INSERT INTO commandes (nom_client, telephone, ville, adresse, mode_paiement, total, articles, statut)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, 'En préparation')
                     RETURNING id;
                     """,
-                    (nom_client, telephone, ville, adresse, float(total), articles)
+                    (nom_client, telephone, ville, adresse, mode_paiement, float(total), articles)
                 )
                 row = cur.fetchone()
                 commande_id = row[0] if row else None
@@ -137,7 +138,7 @@ def suivre_commande(commande_id):
         with get_db() as conn:
             with conn.cursor(row_factory=dict_row) as cur:
                 cur.execute(
-                    "SELECT id, nom_client, ville, total, statut FROM commandes WHERE id = %s AND telephone = %s;",
+                    "SELECT id, nom_client, ville, mode_paiement, total, statut FROM commandes WHERE id = %s AND telephone = %s;",
                     (commande_id, telephone)
                 )
                 commande = cur.fetchone()
@@ -170,8 +171,6 @@ def envoyer_contact():
         "subject": f"[{sujet}] Nouveau message de {nom}",
         "htmlContent": f"<p><strong>Nom :</strong> {nom}</p><p><strong>Email :</strong> {email}</p><p><strong>Sujet :</strong> {sujet}</p><p><strong>Message :</strong><br>{message}</p>"
     }
-
-   
 
     brevo_url = "https://api." + "brevo" + ".com" + "/v3/smtp/email"
 

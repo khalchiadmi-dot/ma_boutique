@@ -105,7 +105,8 @@ export default function Admin({
                 <tr>
                   <th>#</th>
                   <th>Client</th>
-                  <th>Ville</th>
+                  <th>Ville & Adresse</th>
+                  <th>Paiement</th>
                   <th>Total</th>
                   <th>Statut</th>
                 </tr>
@@ -115,7 +116,15 @@ export default function Admin({
                   <tr key={c.id}>
                     <td>{c.id}</td>
                     <td>{c.nom_client}<br /><small>{c.telephone}</small></td>
-                    <td>{c.ville}</td>
+                    <td>
+                      <strong>{c.ville}</strong>
+                      {c.adresse && <><br /><small>{c.adresse}</small></>}
+                    </td>
+                    <td>
+                      <small style={{ fontWeight: '600', color: 'var(--bleu-profond)' }}>
+                        {c.mode_paiement || 'Paiement à la livraison'}
+                      </small>
+                    </td>
                     <td><strong>{c.total} €</strong></td>
                     <td>
                       <select
