@@ -9,7 +9,7 @@ import Suivi from './Suivi';
 export default function App() {
   const [produits, setProduits] = useState([]);
   const [panier, setPanier] = useState(() => {
-    const sauvegarde = localStorage.getItem('panier_auralia');
+  const sauvegarde = localStorage.getItem('panier_auralia');
     return sauvegarde ? JSON.parse(sauvegarde) : [];
   });
   const [voirPanier, setVoirPanier] = useState(false);
@@ -31,7 +31,8 @@ export default function App() {
   const [adresse, setAdresse] = useState('');
   const [modePaiement, setModePaiement] = useState('Paiement à la livraison');
 
-  const API_URL = "https://onrender.com";
+  const API_URL = "https://ma-boutique-api-bae2" + ".onrender" + ".com";
+
 
   useEffect(() => {
     localStorage.setItem('panier_auralia', JSON.stringify(panier));
@@ -51,8 +52,11 @@ export default function App() {
     fetch(`${API_URL}/api/commandes`).then(r => r.json()).then(setCommandesAdmin).catch(console.error);
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { chargerProduits(); }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { if (modeAdmin) chargerCommandesAdmin(); }, [modeAdmin]);
+
 
   const totalPanier = panier.reduce((acc, item) => acc + item.prix, 0).toFixed(2);
 
