@@ -14,7 +14,8 @@ if DATABASE_URL.startswith("postgres://"):
     DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
 
 BREVO_API_KEY = os.environ.get("BREVO_API_KEY")
-ADMIN_EMAIL = os.environ.get("ADMIN_EMAIL", "contact@aurelia.com")
+ADMIN_EMAIL = os.environ.get("EMAIL_BOUTIQUE", "khalchiadmi@gmail.com")
+
 
 def get_db():
     return psycopg.connect(DATABASE_URL, connect_timeout=5, prepare_threshold=None)
@@ -170,7 +171,10 @@ def envoyer_contact():
         "htmlContent": f"<p><strong>Nom :</strong> {nom}</p><p><strong>Email :</strong> {email}</p><p><strong>Sujet :</strong> {sujet}</p><p><strong>Message :</strong><br>{message}</p>"
     }
 
-    brevo_url = "https://brevo.com"
+   
+
+    brevo_url = "https://api." + "brevo" + ".com" + "/v3/smtp/email"
+
     req = urllib.request.Request(
         brevo_url,
         data=json.dumps(payload).encode('utf-8'),
