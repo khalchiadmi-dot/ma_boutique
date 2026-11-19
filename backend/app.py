@@ -169,7 +169,7 @@ def envoyer_contact():
         "htmlContent": f"<p><strong>Nom :</strong> {nom}</p><p><strong>Email :</strong> {email}</p><p><strong>Message :</strong><br>{message}</p>"
     }
 
-    brevo_url = "//brevo.com"
+    brevo_url = "https://brevo.com"
     req = urllib.request.Request(
         brevo_url,
         data=json.dumps(payload).encode('utf-8'),
