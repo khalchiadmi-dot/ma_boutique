@@ -156,6 +156,7 @@ def envoyer_contact():
     data = request.get_json()
     nom = data.get('nom', 'Client')
     email = data.get('email', '')
+    sujet = data.get('sujet', 'Demande de contact')
     message = data.get('message', '')
 
     if not BREVO_API_KEY:
@@ -165,8 +166,8 @@ def envoyer_contact():
         "sender": {"name": "Boutique Aurelia", "email": ADMIN_EMAIL},
         "to": [{"email": ADMIN_EMAIL}],
         "replyTo": {"email": email, "name": nom} if email else {"email": ADMIN_EMAIL},
-        "subject": f"Nouveau message de {nom}",
-        "htmlContent": f"<p><strong>Nom :</strong> {nom}</p><p><strong>Email :</strong> {email}</p><p><strong>Message :</strong><br>{message}</p>"
+        "subject": f"[{sujet}] Nouveau message de {nom}",
+        "htmlContent": f"<p><strong>Nom :</strong> {nom}</p><p><strong>Email :</strong> {email}</p><p><strong>Sujet :</strong> {sujet}</p><p><strong>Message :</strong><br>{message}</p>"
     }
 
     brevo_url = "https://brevo.com"
@@ -176,15 +177,20 @@ def envoyer_contact():
         headers={
             "accept": "application/json",
             "api-key": BREVO_API_KEY,
-            "content-type": "application/json"
+            "content-type": "application/json",
+            "User-Agent": "Mozilla/5.0"
         },
         method="POST"
     )
     try:
         urllib.request.urlopen(req)
         return jsonify({"message": "Message envoyé avec succès !"}), 200
+    except urllib.error.HTTPError as e:
+        details = e.read().decode('utf-8')
+        return jsonify({"error": f"Erreur Brevo ({e.code}): {details}"}), 500
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 10000))

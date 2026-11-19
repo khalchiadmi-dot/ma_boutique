@@ -8,7 +8,15 @@ import Suivi from './Suivi'
 
 export default function App() {
   const [produits, setProduits] = useState([]);
-  const [panier, setPanier] = useState([]);
+  const [panier, setPanier] = useState(() => {
+  const sauvegarde = localStorage.getItem('panier_auralia');
+  return sauvegarde ? JSON.parse(sauvegarde) : [];
+});
+
+useEffect(() => {
+  localStorage.setItem('panier_auralia', JSON.stringify(panier));
+}, [panier]);
+
   const [voirPanier, setVoirPanier] = useState(false);
   const [envoiEnCours, setEnvoiEnCours] = useState(false);
   const [modeAdmin, setModeAdmin] = useState(window.location.pathname === '/admin');
@@ -83,13 +91,20 @@ export default function App() {
         nom_client: nom, telephone, ville, adresse, total: totalPanier,
         articles: panier.map(i => ({ nom: i.nom, prix: i.prix }))
       })
-    }).then(r => r.json()).then(d => {
-      setEnvoiEnCours(false);
-      if (d.message === "Succès") {
-        alert(`🎉 Commande #${d.commande_id} enregistrée !`);
-        setPanier([]); setVoirPanier(false); setEtapeCommande(false);
-      }
-    }).catch(() => setEnvoiEnCours(false));
+      }).then(async r => {
+    const d = await r.json();
+    setEnvoiEnCours(false);
+    if (r.ok && d.message === "Succès") {
+      alert(`🎉 Commande #${d.commande_id} enregistrée !`);
+      setPanier([]); setVoirPanier(false); setEtapeCommande(false);
+    } else {
+      alert("⚠️ Erreur : " + (d.error || "Impossible d'enregistrer la commande."));
+    }
+  }).catch(() => {
+    setEnvoiEnCours(false);
+    alert("⚠️ Le serveur met du temps à répondre, veuillez réessayer dans quelques secondes.");
+  });
+
   };
 
   return (
